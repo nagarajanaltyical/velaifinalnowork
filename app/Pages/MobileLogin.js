@@ -50,7 +50,7 @@ export default function Mobillogin({ route, navigation }) {
       console.log(mobilenumber);
       if (mobilenumber.length > 10) {
         const body = { number: mobilenumber };
-        const response = await fetch("http://192.168.1.5:5000/sms", {
+        const response = await fetch("http://192.168.1.2:5000/sms", {
           method: "POST", // *GET, POST, PUT, DELETE, etc.
           mode: "cors", // no-cors, *cors, same-origin
           cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
@@ -83,7 +83,7 @@ export default function Mobillogin({ route, navigation }) {
   const [valid, isvalid] = useState(false);
   const phoneInput = useRef(null);
 
-  const [seconds, setSeconds] = useState(60);
+  const [seconds, setSeconds] = useState(120);
   const [isActive, setIsActive] = useState(false);
   function toggle() {
     setIsActive(!isActive);
@@ -111,7 +111,7 @@ export default function Mobillogin({ route, navigation }) {
     try {
       const body = {};
       body.number = mobilenumber;
-      const response = await fetch("http://192.168.1.5:5000/invaild", {
+      const response = await fetch("http://192.168.1.2:5000/invaild", {
         method: "POST", // *GET, POST, PUT, DELETE, etc.
         mode: "cors", // no-cors, *cors, same-origin
         cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
@@ -167,7 +167,7 @@ export default function Mobillogin({ route, navigation }) {
               <MaterialCommunityIcons
                 name="account-voice-off"
                 size={24}
-                color="black"
+                color="#333"
               />
             )}
           </Pressable>
@@ -225,7 +225,7 @@ export default function Mobillogin({ route, navigation }) {
           style={{
             width: "100%",
             color: "#333",
-            marginTop: 32,
+            marginTop: 26,
             textAlign: "center",
             fontSize: 25,
             fontWeight: "600",
@@ -235,7 +235,7 @@ export default function Mobillogin({ route, navigation }) {
         </Text>
         <View
           style={{
-            top: 10,
+            // top: 10,
             justifyContent: "space-between",
             flexWrap: "nowrap",
             flexDirection: "row",
@@ -280,16 +280,13 @@ export default function Mobillogin({ route, navigation }) {
             autoFocus
           />
         </View>
-        <View
-          style={{
-            height: 200,
-            marginTop: -87,
-          }}
-        >
+
+        <View style={{ marginTop: -100 }}>
           <View
             style={{
               flexDirection: "row",
-              marginLeft: 17,
+              marginLeft: 15,
+              marginBottom: 15,
             }}
           >
             <Pressable onPress={() => setistick(!istick)}>
@@ -297,239 +294,277 @@ export default function Mobillogin({ route, navigation }) {
                 <MaterialIcons
                   name="check-box-outline-blank"
                   size={24}
-                  color="black"
+                  color="#1e5966"
                 />
               ) : (
-                <MaterialIcons name="check-box" size={24} color="black" />
+                <MaterialIcons name="check-box" size={24} color="#1e5966" />
               )}
             </Pressable>
-            <Text> I agree terms and conditions</Text>
+            <Text style={{ fontSize: 17 }}>I agree </Text>
+
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate("Termscondition");
+              }}
+            >
+              <Text style={{ color: "#0047FF", fontSize: 17 }}>
+                terms and conditions
+              </Text>
+            </TouchableOpacity>
+          </View>
+          <View
+            style={{
+              width: "100%",
+              // justifyContent: "center",
+              alignItems: "center",
+              marginBottom: 20,
+            }}
+          >
+            <Text style={{ fontSize: 23, fontWeight: "500", color: "#333" }}>
+              Enter OTP
+            </Text>
+          </View>
+          <View
+            style={{
+              // marginHorizontal: 30,
+              borderColor: "#fff",
+              // marginTop: 20,
+              alignContent: "center",
+              width: "120%",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Pressable onPress={Keyboard.dismiss}>
+              <OTPInput
+                code={otpCode}
+                setCode={setotpCode}
+                maximumLength={maximumCodeLength}
+                setispinready={setispinready}
+              />
+            </Pressable>
           </View>
 
-          <View style={styles.main}>
-            <View style={styles.upperContainer}>
-              <View style={styles.titleContainer}>
-                <Text style={{ fontSize: 20, fontWeight: "400" }}>
-                  Enter OTP
-                </Text>
-              </View>
-              <View
-                style={{
-                  marginHorizontal: 30,
-                  borderColor: "#fff",
-                  marginTop: 20,
-                  width: 500,
-                  alignItems: "center",
-                  paddingLeft: 60,
-                }}
-              >
-                <Pressable onPress={Keyboard.dismiss}>
-                  <OTPInput
-                    code={otpCode}
-                    setCode={setotpCode}
-                    maximumLength={maximumCodeLength}
-                    setispinready={setispinready}
-                  />
-                </Pressable>
-              </View>
-            </View>
+          <View
+            style={{
+              justifyContent: "center",
+              alignItems: "center",
+              width: "100%",
+            }}
+          >
             <Text
               style={{
-                marginHorizontal: 160,
                 fontSize: 17,
                 fontWeight: "400",
                 color: "#1E5966",
-                width: "100%",
-                marginTop: 20,
+                marginTop: 10,
               }}
             >
-              00.{seconds} Sec
+              {seconds} Sec
             </Text>
-            <View style={{ width: "100%", justifyContent: "center" }}>
-              <LinearGradient
-                colors={["#16323B", "#1F4C5B", "#1E5966", "#16323B"]}
-                style={{
-                  height: 49,
-                  width: 290,
-                  marginHorizontal: 50,
-                  borderRadius: 10,
-                  opacity: mobilenumber.length > 1 && !istick ? 1 : 0.5,
-                  marginTop: 30,
-                }}
-                start={{ x: 0, y: 0 }}
-                end={{ x: 1, y: 1 }}
-                useAngle={45}
-              >
-                {!isotpFound ? (
-                  <TouchableOpacity
-                    style={{
-                      height: 49,
-                      width: 290,
-                      justifyContent: "center",
-                      alignItems: "center",
-                    }}
-                    // disabled={!ispinCorrect}
-                    disabled={!(mobilenumber.length > 1 && !istick)}
-                    onPress={async () => {
-                      setIsActive(true);
-                      const checkValid =
-                        phoneInput.current?.isValidNumber(value);
-                      console.log(checkValid);
-                      isvalid(!checkValid);
-                      if (checkValid) {
-                        const body = {};
-                        body.number = mobilenumber;
-                        console.log(body);
-                        try {
-                          await fetch("http://192.168.1.5:5000/api/sms", {
-                            method: "POST",
-                            mode: "cors", // no-cors, *cors, same-origin
-                            cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-                            credentials: "same-origin", // include, *same-origin, omit
-                            headers: {
-                              "Content-Type": "application/json",
-                              // 'Content-Type': 'application/x-www-form-urlencoded',
-                            },
-                            body: JSON.stringify(body), // body data type must match "Content-Type" header
-                          })
-                            .then((response) => response.json())
-                            .then((result) => {
-                              console.log("IM AT THE ");
-                              console.log(result.updated);
-                              if (result) {
-                                showToastWithGravity("Sucess");
-                                setisotpFound(true);
-                                setIsActive(true);
-                              } else {
-                                alert(result);
-                              }
-                            });
-                        } catch (error) {
-                          console.warn(error);
-                        }
-                      }
-                    }}
-                  >
-                    <Text
-                      style={{ fontSize: 16, fontWeight: "900", color: "#fff" }}
-                    >
-                      Request OTP
-                    </Text>
-                  </TouchableOpacity>
-                ) : (
-                  <TouchableOpacity
-                    style={{
-                      height: 49,
-                      width: 290,
-                      justifyContent: "center",
-                      alignItems: "center",
-                    }}
-                    onPress={async () => {
-                      const value = {};
-                      value.otp = otpCode;
-                      value.number = mobilenumber;
-                      console.log(value);
+          </View>
+          <View
+            style={{
+              width: "100%",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <LinearGradient
+              colors={["#16323B", "#1F4C5B", "#1E5966", "#16323B"]}
+              style={{
+                height: 49,
+                width: 290,
+                // marginHorizontal: 50,
+                borderRadius: 10,
+                opacity: mobilenumber.length > 1 && !istick ? 1 : 0.5,
+                marginTop: 12,
+              }}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 1 }}
+              useAngle={45}
+            >
+              {!isotpFound ? (
+                <TouchableOpacity
+                  style={{
+                    height: 49,
+                    width: 290,
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                  // disabled={!ispinCorrect}
+                  disabled={!(mobilenumber.length > 1 && !istick)}
+                  onPress={async () => {
+                    setIsActive(true);
+                    const checkValid = phoneInput.current?.isValidNumber(value);
+                    console.log(checkValid);
+                    isvalid(!checkValid);
+                    if (checkValid) {
+                      const body = {};
+                      body.number = mobilenumber;
+                      console.log(body);
                       try {
-                        await fetch(
-                          "http://192.168.1.5:5000/sms/verification",
-                          {
-                            method: "POST",
-                            mode: "cors", // no-cors, *cors, same-origin
-                            cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-                            credentials: "same-origin", // include, *same-origin, omit
-                            headers: {
-                              "Content-Type": "application/json",
-                              // 'Content-Type': 'application/x-www-form-urlencoded',
-                            },
-                            body: JSON.stringify(value), // body data type must match "Content-Type" header
-                          }
-                        )
+                        await fetch("http://192.168.1.2:5000/api/sms", {
+                          method: "POST",
+                          mode: "cors", // no-cors, *cors, same-origin
+                          cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+                          credentials: "same-origin", // include, *same-origin, omit
+                          headers: {
+                            "Content-Type": "application/json",
+                            // 'Content-Type': 'application/x-www-form-urlencoded',
+                          },
+                          body: JSON.stringify(body), // body data type must match "Content-Type" header
+                        })
                           .then((response) => response.json())
                           .then((result) => {
-                            console.log(result);
-                            if (result.msg === "Login success") {
+                            console.log("IM AT THE ");
+                            console.log(result.updated);
+                            if (result) {
                               showToastWithGravity("Sucess");
-                              navigation.navigate("botnav");
+                              setisotpFound(true);
+                              setIsActive(true);
                             } else {
-                              showToastWithGravity("Error");
+                              alert(result);
                             }
                           });
                       } catch (error) {
                         console.warn(error);
                       }
-                    }}
-                  >
-                    <Text
-                      style={{ fontSize: 16, fontWeight: "900", color: "#fff" }}
-                    >
-                      Verify OTP
-                    </Text>
-                  </TouchableOpacity>
-                )}
-              </LinearGradient>
-            </View>
-            <View>
-              <Text
-                style={{
-                  marginHorizontal: 90,
-                  fontSize: 15,
-                  width: "100%",
-                  fontWeight: "400",
-                  marginTop: 20,
-                }}
-              >
-                Don’t receive a code?
-                {/* {console.log(seconds)} */}
-              </Text>
-
-              <TouchableOpacity
-                disabled={!seconds == 0}
-                onPress={async () => {
-                  setotpCode("");
-
-                  const value = {};
-                  value.number = mobilenumber;
-                  console.log(value);
-                  try {
-                    await fetch("http://192.168.1.5:5000/api/sms", {
-                      method: "POST",
-                      mode: "cors", // no-cors, *cors, same-origin
-                      cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-                      credentials: "same-origin", // include, *same-origin, omit
-                      headers: {
-                        "Content-Type": "application/json",
-                        // 'Content-Type': 'application/x-www-form-urlencoded',
-                      },
-                      body: JSON.stringify(value), // body data type must match "Content-Type" header
-                    })
-                      .then((response) => response.json())
-                      .then((result) => {
-                        // console.log("")
-                        console.log(result);
-                        if (result) {
-                          showToastWithGravity("Sucess");
-                          setSeconds(30);
-                          setIsActive(true);
-                        } else {
-                          showToastWithGravity("Error");
-                        }
-                      });
-                  } catch (error) {
-                    console.warn(error);
-                  }
-                }}
-              >
-                <Text
-                  style={{
-                    color: seconds == 0 ? "#0047FF" : "grey",
-                    paddingTop: 10,
-                    height: 300,
+                    }
                   }}
                 >
-                  Resend
-                </Text>
-              </TouchableOpacity>
-            </View>
+                  <Text
+                    style={{ fontSize: 16, fontWeight: "900", color: "#fff" }}
+                  >
+                    Request OTP
+                  </Text>
+                </TouchableOpacity>
+              ) : (
+                <TouchableOpacity
+                  style={{
+                    height: 49,
+                    width: 290,
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                  onPress={async () => {
+                    const value = {};
+                    value.otp = otpCode;
+                    value.number = mobilenumber;
+                    console.log(value);
+                    try {
+                      await fetch("http://192.168.1.2:5000/sms/verification", {
+                        method: "POST",
+                        mode: "cors", // no-cors, *cors, same-origin
+                        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+                        credentials: "same-origin", // include, *same-origin, omit
+                        headers: {
+                          "Content-Type": "application/json",
+                          // 'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: JSON.stringify(value), // body data type must match "Content-Type" header
+                      })
+                        .then((response) => response.json())
+                        .then((result) => {
+                          console.log(result);
+                          if (result.msg === "Login success") {
+                            showToastWithGravity("Sucess");
+                            navigation.navigate("botnav");
+                          } else {
+                            showToastWithGravity("Error");
+                          }
+                        });
+                    } catch (error) {
+                      console.warn(error);
+                    }
+                  }}
+                >
+                  <Text
+                    style={{ fontSize: 16, fontWeight: "900", color: "#fff" }}
+                  >
+                    Verify OTP
+                  </Text>
+                </TouchableOpacity>
+              )}
+            </LinearGradient>
+          </View>
+          <View
+            style={{
+              fontSize: 15,
+              flexDirection: "row",
+              justifyContent: "center",
+              alignItems: "center",
+              width: "100%",
+              fontWeight: "400",
+              marginTop: 20,
+            }}
+          >
+            <Text
+              style={{
+                // marginHorizontal: 90,
+                fontSize: 15,
+                // width: "100%",
+                // fontWeight: "400",
+                // marginTop: 20,
+              }}
+            >
+              Don’t receive a code?
+              {/* {console.log(seconds)} */}
+            </Text>
+
+            <TouchableOpacity
+              disabled={!seconds == 0}
+              onPress={async () => {
+                setotpCode("");
+
+                const value = {};
+                value.number = mobilenumber;
+                console.log(value);
+                try {
+                  await fetch("http://192.168.1.5:5000/api/sms", {
+                    method: "POST",
+                    mode: "cors", // no-cors, *cors, same-origin
+                    cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+                    credentials: "same-origin", // include, *same-origin, omit
+                    headers: {
+                      "Content-Type": "application/json",
+                      // 'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: JSON.stringify(value), // body data type must match "Content-Type" header
+                  })
+                    .then((response) => response.json())
+                    .then((result) => {
+                      // console.log("")
+                      console.log(result);
+                      if (result) {
+                        showToastWithGravity("Sucess");
+                        setSeconds(30);
+                        setIsActive(true);
+                      } else {
+                        showToastWithGravity("Error");
+                      }
+                    });
+                } catch (error) {
+                  console.warn(error);
+                }
+              }}
+            >
+              <Text
+                style={{
+                  color: seconds == 0 ? "#0047FF" : "grey",
+                  // justifyContent: "center",
+                  // alignItems: "center",
+                  // alignContent: "center",
+                  fontSize: 20,
+                  marginLeft: 10,
+                  // width: "100%",
+                  fontWeight: "400",
+                  // marginTop: 20,
+                }}
+              >
+                Resend
+              </Text>
+            </TouchableOpacity>
           </View>
         </View>
       </View>
@@ -549,6 +584,8 @@ const styles = StyleSheet.create({
   },
   main: {
     flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
   },
   upperContainer: {
     marginVertical: 10,

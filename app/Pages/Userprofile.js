@@ -41,13 +41,24 @@ import { LinearGradient } from "expo-linear-gradient";
 import OtpScreen from "./Otpscreen";
 import OTPInput from "../components/otp/otpInput";
 import * as ImagePicker from "expo-image-picker";
-import { LocalizationContext } from "../../App";
+import { AuthContext, LocalizationContext } from "../../App";
 import { number } from "yup";
 import { DateTimePickerAndroid } from "@react-native-community/datetimepicker";
 import { Button } from "react-native-paper";
 export default function Userprofile({ navigation }) {
   const { t, language, setlanguage } = useContext(LocalizationContext);
   const [ActivityIndicators, setActivityIndicators] = useState(false);
+  const { state, dispatch } = useContext(AuthContext);
+  console.log(state);
+  console.log(state.userdeatils);
+  const handlecall = () => {
+    // console.log("console.log");
+    // alert("hiiii");
+    dispatch({ type: "userdetails" });
+    // setuserdetails("true");
+    setTimeout(() => navigation.navigate("bottomhome"), 100);
+  };
+
   const [image, setImage] = useState(null);
   //to get skills
   useEffect(() => {
@@ -232,77 +243,9 @@ export default function Userprofile({ navigation }) {
   const [jobprovider, setjobprovider] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: "#ffff" }}>
       <StatusBar style="auto" />
-      <View
-        style={{
-          height: 60,
-          width: "100%",
-          position: "relative",
-          backgroundColor: "#fff",
-          flexDirection: "row",
-          justifyContent: "flex-start",
-          // alignItems: "center",
-          // justifyContent: "center",
-          // alignContent: "center",
-        }}
-      >
-        <View
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-          }}
-        >
-          <Text>
-            <AntDesign name="left" size={24} color="#333" />
-          </Text>
-          <Text
-            style={{
-              marginRight: 40,
-              marginLeft: 5,
-              width: 190,
-              alignItems: "center",
-              fontSize: 16,
-              fontWeight: "400",
-            }}
-          >
-            Adyar, Chennai
-          </Text>
-        </View>
-        <View
-          style={{
-            flexDirection: "row",
-            justifyContent: "center",
-            alignItems: "center",
-            width: "30%",
-          }}
-        >
-          <Ionicons name="md-globe-outline" size={24} color="#333" />
-          <Pressable>
-            <Text style={{ marginLeft: 3, Text: 18, color: "#333" }}>EN</Text>
-          </Pressable>
-          <Pressable onPress={() => setisvoice(!isvoice)}>
-            {isvoice ? (
-              <MaterialCommunityIcons
-                name="account-voice"
-                size={24}
-                color="#333"
-              />
-            ) : (
-              <MaterialCommunityIcons
-                name="account-voice-off"
-                size={24}
-                color="black"
-              />
-            )}
-          </Pressable>
-          <Pressable
-            onPress={() => {
-              navigation.navigate("role1");
-            }}
-          ></Pressable>
-        </View>
-      </View>
+
       <View style={styles.title}>
         <Text style={styles.titlestyle}>Personal Information</Text>
       </View>
@@ -693,16 +636,33 @@ export default function Userprofile({ navigation }) {
                     </View>
                   </View>
                 </TouchableOpacity>
-                <View style={styles.buttonContainer}>
+                <TouchableOpacity onPress={() => handlecall()}>
+                  <Text>enter details</Text>
+                </TouchableOpacity>
+                <LinearGradient
+                  colors={["#16323B", "#1F4C5B", "#1E5966", "#16323B"]}
+                  style={{
+                    backgroundColor: isValid ? "#6BC3FF" : "#87CEEB",
+                    fontWeight: "600",
+
+                    padding: 10,
+                    width: "50%",
+                    alignSelf: "center",
+                    borderRadius: 10,
+                    marginVertical: 20,
+                  }}
+                  start={{ x: 0, y: 0 }}
+                  end={{ x: 1, y: 1 }}
+                  useAngle={45}
+                >
                   <TouchableOpacity
-                    style={{
-                      backgroundColor: isValid ? "#6BC3FF" : "#87CEEB",
-                      padding: 10,
-                      width: "50%",
-                      alignSelf: "center",
-                      borderRadius: 10,
-                      marginVertical: 20,
-                    }}
+                    // style={{
+                    //   padding: 10,
+                    //   width: "50%",
+                    //   alignSelf: "center",
+                    //   borderRadius: 10,
+                    //   marginVertical: 20,
+                    // }}
                     onPress={handleSubmit}
                     disabled={!isValid}
                   >
@@ -716,7 +676,7 @@ export default function Userprofile({ navigation }) {
                       Create
                     </Text>
                   </TouchableOpacity>
-                </View>
+                </LinearGradient>
               </View>
             </>
           )}

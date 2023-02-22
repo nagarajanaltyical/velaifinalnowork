@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet, Pressable, Image } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { AntDesign } from "@expo/vector-icons";
+import { AntDesign, FontAwesome } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 import { useState, useEffect } from "react";
 import DropDownRole from "./dropdown/dropdownRole";
@@ -118,7 +118,7 @@ export default function Top() {
       <View style={styles.leftSide}>
         <View style={{ marginLeft: 5 }}>
           <Text>
-            <AntDesign name="left" size={24} color="#333" />
+            <FontAwesome name="location-arrow" size={24} color="#333" />
           </Text>
         </View>
         <View>

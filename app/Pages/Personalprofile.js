@@ -23,6 +23,7 @@ import { SimpleLineIcons } from "@expo/vector-icons";
 import { Octicons } from "@expo/vector-icons";
 import { LocalizationContext } from "../../App";
 import * as ImagePicker from "expo-image-picker";
+import { LinearGradient } from "expo-linear-gradient";
 export default function PersonProfilepage() {
   const [modalVisible, setModalVisible] = useState(false);
   const [ActivityIndicators, setActivityIndicators] = useState(false);
@@ -114,11 +115,38 @@ export default function PersonProfilepage() {
         <View style={styles.top2}>
           <View style={{ marginVertical: 5, flexDirection: "row" }}>
             <Text style={{ fontSize: 18, color: "#333" }}>+91 8220553838</Text>
-            <TouchableOpacity
+            <LinearGradient
+              colors={["#16323B", "#1F4C5B", "#1E5966", "#16323B"]}
+              style={{
+                height: 35,
+                width: 100,
+                marginLeft: 20,
+                borderRadius: 10,
+                marginTop: 4,
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 1 }}
+              useAngle={45}
+            >
+              <Text
+                style={{
+                  color: "#fff",
+                  fontSize: 12,
+                  fontWeight: "400",
+                  marginHorizontal: 10,
+                  justifyContent: "center",
+                }}
+              >
+                Profile: 100%
+              </Text>
+            </LinearGradient>
+            {/* <TouchableOpacity
               style={{ backgroundColor: "green", borderRadius: 25 }}
             >
               <Text>Profile:100%</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
           </View>
           <View>
             <Text style={{ fontSize: 18, color: "#333" }}>Adayar,chennai</Text>
@@ -443,9 +471,43 @@ export default function PersonProfilepage() {
           </View>
         </View>
         <View>
-          <TouchableOpacity style={{ backgroundColor: "red" }}>
-            <Text>Update</Text>
-          </TouchableOpacity>
+          <View
+            style={{
+              width: "100%",
+              paddingLeft: 200,
+            }}
+          >
+            <LinearGradient
+              colors={["#16323B", "#1F4C5B", "#1E5966", "#16323B"]}
+              style={{
+                height: 49,
+                width: 170,
+                // marginHorizontal: 50,
+                borderRadius: 10,
+                // opacity: mobilenumber.length > 1 && !istick ? 1 : 0.5,
+                // marginTop: 30,
+              }}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 1 }}
+              useAngle={45}
+            >
+              <TouchableOpacity
+                style={{
+                  justifyContent: "flex-end",
+                  height: 49,
+                  width: 170,
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Text
+                  style={{ color: "#fff", fontSize: 18, fontWeight: "600" }}
+                >
+                  Update
+                </Text>
+              </TouchableOpacity>
+            </LinearGradient>
+          </View>
         </View>
       </ScrollView>
     </View>

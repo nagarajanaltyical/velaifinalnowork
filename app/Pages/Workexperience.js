@@ -172,7 +172,12 @@ export default function Workexperience() {
   const [jobprovider, setjobprovider] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView
+      style={{
+        flex: 1,
+        backgroundColor: "#fff",
+      }}
+    >
       <StatusBar style="auto" />
       <ScrollView nestedScrollEnabled={true}>
         <Formik
@@ -368,16 +373,30 @@ export default function Workexperience() {
                     )}
                   </View>
                 </View>
-                <View style={styles.buttonContainer}>
+                <LinearGradient
+                  colors={["#16323B", "#1F4C5B", "#1E5966", "#16323B"]}
+                  style={{
+                    backgroundColor: isValid ? "#6BC3FF" : "#87CEEB",
+                    fontWeight: "600",
+
+                    padding: 10,
+                    width: "50%",
+                    alignSelf: "center",
+                    borderRadius: 10,
+                    marginVertical: 20,
+                  }}
+                  start={{ x: 0, y: 0 }}
+                  end={{ x: 1, y: 1 }}
+                  useAngle={45}
+                >
                   <TouchableOpacity
-                    style={{
-                      backgroundColor: isValid ? "#6BC3FF" : "#87CEEB",
-                      padding: 10,
-                      width: "50%",
-                      alignSelf: "center",
-                      borderRadius: 10,
-                      marginVertical: 20,
-                    }}
+                    // style={{
+                    //   padding: 10,
+                    //   width: "50%",
+                    //   alignSelf: "center",
+                    //   borderRadius: 10,
+                    //   marginVertical: 20,
+                    // }}
                     onPress={handleSubmit}
                     disabled={!isValid}
                   >
@@ -391,7 +410,7 @@ export default function Workexperience() {
                       Create
                     </Text>
                   </TouchableOpacity>
-                </View>
+                </LinearGradient>
               </View>
             </>
           )}

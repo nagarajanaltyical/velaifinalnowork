@@ -445,6 +445,188 @@ export default function SelectCategory({ route }) {
         </View>
         <View
           style={{
+            height: 60,
+            backgroundColor: "#16323B",
+            marginHorizontal: 20,
+            borderRadius: 20,
+          }}
+        >
+          {/* <Image
+            resizeMode="contain"
+            source={require("../Maincategory/Categoryimage/Rectangle.png")}
+            style={{ width: 40, height: 40 }}
+          /> */}
+        </View>
+        <View
+          style={{
+            backgroundColor: "#FFF",
+            flexDirection: "row",
+            justifyContent: "space-around",
+          }}
+        >
+          <LinearGradient
+            colors={["#16323B", "#1F4C5B", "#1E5966", "#16323B"]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 1 }}
+            useAngle={45}
+            style={{
+              height: 80,
+              width: 80,
+              backgroundColor: "#FFFFFF",
+              marginHorizontal: 5,
+              marginVertical: 20,
+              justifyContent: "center",
+              alignItems: "center",
+              // borderWidth: 1,
+              // borderColor: "#A3A3A3",
+              borderRadius: 20,
+              alignContent: "center",
+              position: "relative",
+              // shadowColor: "#000000",
+              // shadowOffset: {
+              //   width: 0,
+              //   height: 6,
+              // },
+              // shadowOpacity: 0.2,
+              // shadowRadius: 15.62,
+              // elevation: 18,
+            }}
+          >
+            <Image
+              resizeMode="contain"
+              source={require("../Maincategory/Categoryimage/deal.png")}
+              style={{ width: 40, height: 40 }}
+            />
+            <Text
+              style={{
+                fontSize: 15,
+                color: "#fff",
+                marginTop: 10,
+                fontWeight: "600",
+              }}
+            >
+              Insurance
+            </Text>
+            {/* <Text
+              style={{
+                fontSize: 15,
+                color: "#fff",
+                fontWeight: "600",
+              }}
+            >
+              PROVIDER
+            </Text> */}
+          </LinearGradient>
+          <LinearGradient
+            colors={["#16323B", "#1F4C5B", "#1E5966", "#16323B"]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 1 }}
+            useAngle={45}
+            style={{
+              height: 80,
+              width: 80,
+              backgroundColor: "#FFFFFF",
+              marginHorizontal: 5,
+              marginVertical: 20,
+              justifyContent: "center",
+              alignItems: "center",
+              // borderWidth: 1,
+              // borderColor: "#A3A3A3",
+              borderRadius: 20,
+              alignContent: "center",
+              position: "relative",
+              // shadowColor: "#000000",
+              // shadowOffset: {
+              //   width: 0,
+              //   height: 6,
+              // },
+              // shadowOpacity: 0.2,
+              // shadowRadius: 15.62,
+              // elevation: 18,
+            }}
+          >
+            <Image
+              resizeMode="contain"
+              source={require("../Maincategory/Categoryimage/Freelance.png")}
+              style={{ width: 40, height: 40 }}
+            />
+            <Text
+              style={{
+                fontSize: 15,
+                color: "#fff",
+                marginTop: 10,
+                fontWeight: "600",
+              }}
+            >
+              Freelance
+            </Text>
+            {/* <Text
+              style={{
+                fontSize: 15,
+                color: "#fff",
+                fontWeight: "600",
+              }}
+            >
+              PROVIDER
+            </Text> */}
+          </LinearGradient>
+          <LinearGradient
+            colors={["#16323B", "#1F4C5B", "#1E5966", "#16323B"]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 1 }}
+            useAngle={45}
+            style={{
+              height: 80,
+              width: 80,
+              backgroundColor: "#FFFFFF",
+              marginHorizontal: 5,
+              marginVertical: 20,
+              justifyContent: "center",
+              alignItems: "center",
+              // borderWidth: 1,
+              // borderColor: "#A3A3A3",
+              borderRadius: 20,
+              alignContent: "center",
+              position: "relative",
+              // shadowColor: "#000000",
+              // shadowOffset: {
+              //   width: 0,
+              //   height: 6,
+              // },
+              // shadowOpacity: 0.2,
+              // shadowRadius: 15.62,
+              // elevation: 18,
+            }}
+          >
+            <Image
+              resizeMode="contain"
+              source={require("../Maincategory/Categoryimage/govt.png")}
+              style={{ width: 40, height: 40 }}
+            />
+            <Text
+              style={{
+                fontSize: 12,
+                color: "#fff",
+                marginTop: 10,
+                fontWeight: "600",
+              }}
+            >
+              Government Job
+            </Text>
+            {/* <Text
+              style={{
+                fontSize: 15,
+                color: "#fff",
+                fontWeight: "600",
+              }}
+            >
+              PROVIDER
+            </Text> */}
+          </LinearGradient>
+        </View>
+
+        <View
+          style={{
             height: 240,
             width: "100%",
 

@@ -152,13 +152,14 @@ export default function Faq() {
             If you encounter any inappropriate content or behavior on the job
             portal application, please contact us immediately so we can
             investigate and take appropriate action.
-            <Text style={{ fontSize: 17 }}>
-              10. How do I get help or support?
-            </Text>
-            <Text style={{ marginBottom: 10 }}>
-              If you need help or support, please contact us at [insert contact
-              information] and we will be happy to assist you.
-            </Text>
+          </Text>
+
+          <Text style={{ fontSize: 17 }}>
+            10. How do I get help or support?
+          </Text>
+          <Text style={{ marginBottom: 10 }}>
+            If you need help or support, please contact us at [insert contact
+            information] and we will be happy to assist you.
           </Text>
         </View>
       </ScrollView>

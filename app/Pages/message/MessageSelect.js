@@ -47,7 +47,7 @@ const MessageSelect = () => {
             name="send-circle"
             style={{ marginBottom: 5, marginRight: 5 }}
             size={42}
-            color="#6BC3FF"
+            color="#1E5966"
           />
         </Send>
       </View>
@@ -61,7 +61,7 @@ const MessageSelect = () => {
           {...props}
           wrapperStyle={{
             right: {
-              backgroundColor: "#6BC3FF",
+              backgroundColor: "#1E5966",
             },
           }}
           textStyle={{

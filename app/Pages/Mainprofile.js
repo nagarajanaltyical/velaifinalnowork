@@ -9,6 +9,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { SimpleLineIcons } from "@expo/vector-icons";
 import { Octicons } from "@expo/vector-icons";
+import { LinearGradient } from "expo-linear-gradient";
 export default function Profilepage({ navigation }) {
   return (
     <View style={styles.container}>
@@ -36,7 +37,7 @@ export default function Profilepage({ navigation }) {
           </View>
         </View>
       </View>
-      <ScrollView>
+      <ScrollView style={{ marginHorizontal: 20 }}>
         <View
           style={{
             height: 130,
@@ -44,9 +45,7 @@ export default function Profilepage({ navigation }) {
             alignContent: "center",
             alignItems: "center",
             borderColor: "#D9D9D9",
-            borderWidth: 1,
-            borderBottomWidth: 0,
-            borderBottomColor: "white",
+            borderBottomWidth: 1,
           }}
         >
           <View style={{ marginBottom: 10 }}>
@@ -55,13 +54,34 @@ export default function Profilepage({ navigation }) {
           <View>
             <TouchableOpacity
               onPress={() => navigation.navigate("Userprofile")}
-              style={{
-                backgroundColor: "green",
-                padding: 10,
-                borderRadius: 10,
-              }}
+              // style={{
+              //   backgroundColor: "green",
+              //   padding: 10,
+              //   borderRadius: 10,
+              // }}
             >
-              <Text>Add Personal Details</Text>
+              <LinearGradient
+                colors={["#16323B", "#1F4C5B", "#1E5966", "#16323B"]}
+                style={{
+                  height: 49,
+                  width: 290,
+                  justifyContent: "center",
+                  alignItems: "center",
+                  // marginHorizontal: 50,
+                  borderRadius: 10,
+                  // opacity: mobilenumber.length > 1 && !istick ? 1 : 0.5,
+                  // marginTop: 30,
+                }}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 1 }}
+                useAngle={45}
+              >
+                <Text
+                  style={{ color: "#fff", fontSize: 18, fontWeight: "600" }}
+                >
+                  Add Personal Details
+                </Text>
+              </LinearGradient>
             </TouchableOpacity>
           </View>
         </View>
@@ -73,9 +93,7 @@ export default function Profilepage({ navigation }) {
             alignItems: "flex-start",
             paddingLeft: 30,
             borderColor: "#D9D9D9",
-            borderWidth: 1,
-            borderBottomWidth: 0,
-            borderBottomColor: "white",
+            borderBottomWidth: 1,
           }}
         >
           <TouchableOpacity
@@ -84,11 +102,19 @@ export default function Profilepage({ navigation }) {
               navigation.navigate("personalprofile");
             }}
           >
-            <View style={{ marginBottom: 10 }}>
+            <View
+              style={{
+                marginBottom: 10,
+                justifyContent: "center",
+                alignContent: "center",
+                alignItems: "center",
+                flexDirection: "row",
+              }}
+            >
               <Feather name="edit" size={24} color="black" />
-            </View>
-            <View>
-              <Text style={{ marginLeft: 10 }}>Update Profile</Text>
+              <Text style={{ marginLeft: 10, fontSize: 16, fontWeight: "600" }}>
+                Update Profile
+              </Text>
             </View>
           </TouchableOpacity>
         </View>
@@ -100,22 +126,27 @@ export default function Profilepage({ navigation }) {
             alignItems: "flex-start",
             paddingLeft: 30,
             borderColor: "#D9D9D9",
-            borderWidth: 1,
-            borderBottomWidth: 0,
-            borderBottomColor: "white",
+            borderBottomWidth: 1,
           }}
         >
           <TouchableOpacity
-            style={{ flexDirection: "row", alignItems: "center" }}
             onPress={() => {
               navigation.navigate("Privacypolicy");
             }}
           >
-            <View style={{ marginBottom: 10 }}>
+            <View
+              style={{
+                marginBottom: 10,
+                justifyContent: "center",
+                alignContent: "center",
+                alignItems: "center",
+                flexDirection: "row",
+              }}
+            >
               <MaterialIcons name="security" size={24} color="black" />
-            </View>
-            <View>
-              <Text style={{ marginLeft: 10 }}>Privacy Policies</Text>
+              <Text style={{ marginLeft: 10, fontSize: 16, fontWeight: "600" }}>
+                Privacy Policies
+              </Text>
             </View>
           </TouchableOpacity>
         </View>
@@ -127,26 +158,31 @@ export default function Profilepage({ navigation }) {
             alignItems: "flex-start",
             paddingLeft: 30,
             borderColor: "#D9D9D9",
-            borderWidth: 1,
-            borderBottomWidth: 0,
-            borderBottomColor: "white",
+            borderBottomWidth: 1,
           }}
         >
           <TouchableOpacity
-            style={{ flexDirection: "row", alignItems: "center" }}
             onPress={() => {
               navigation.navigate("Termscondition");
             }}
           >
-            <View style={{ marginBottom: 10 }}>
+            <View
+              style={{
+                marginBottom: 10,
+                justifyContent: "center",
+                alignContent: "center",
+                alignItems: "center",
+                flexDirection: "row",
+              }}
+            >
               <Ionicons
                 name="ios-information-circle-outline"
                 size={24}
                 color="black"
               />
-            </View>
-            <View>
-              <Text style={{ marginLeft: 10 }}>Terms and Conditions</Text>
+              <Text style={{ marginLeft: 10, fontSize: 16, fontWeight: "600" }}>
+                Terms and Conditions
+              </Text>
             </View>
           </TouchableOpacity>
         </View>
@@ -158,19 +194,24 @@ export default function Profilepage({ navigation }) {
             alignItems: "flex-start",
             paddingLeft: 30,
             borderColor: "#D9D9D9",
-            borderWidth: 1,
-            borderBottomWidth: 0,
-            borderBottomColor: "white",
+            borderBottomWidth: 1,
           }}
         >
-          <TouchableOpacity
-            style={{ flexDirection: "row", alignItems: "center" }}
-          >
-            <View style={{ marginBottom: 10 }}>
+          <TouchableOpacity>
+            <View
+              style={{
+                marginBottom: 10,
+                justifyContent: "center",
+                alignContent: "center",
+                alignItems: "center",
+                flexDirection: "row",
+              }}
+            >
               <AntDesign name="customerservice" size={24} color="black" />
-            </View>
-            <View>
-              <Text style={{ marginLeft: 10 }}>Help</Text>
+
+              <Text style={{ marginLeft: 10, fontSize: 16, fontWeight: "600" }}>
+                Help
+              </Text>
             </View>
           </TouchableOpacity>
         </View>
@@ -182,22 +223,27 @@ export default function Profilepage({ navigation }) {
             alignItems: "flex-start",
             paddingLeft: 30,
             borderColor: "#D9D9D9",
-            borderWidth: 1,
-            borderBottomWidth: 0,
-            borderBottomColor: "white",
+            borderBottomWidth: 1,
           }}
         >
           <TouchableOpacity
-            style={{ flexDirection: "row", alignItems: "center" }}
             onPress={() => {
               navigation.navigate("Faq");
             }}
           >
-            <View style={{ marginBottom: 10 }}>
+            <View
+              style={{
+                marginBottom: 10,
+                justifyContent: "center",
+                alignContent: "center",
+                alignItems: "center",
+                flexDirection: "row",
+              }}
+            >
               <SimpleLineIcons name="question" size={24} color="black" />
-            </View>
-            <View>
-              <Text style={{ marginLeft: 10 }}>FAQ</Text>
+              <Text style={{ marginLeft: 10, fontSize: 16, fontWeight: "600" }}>
+                FAQ
+              </Text>
             </View>
           </TouchableOpacity>
         </View>
@@ -209,19 +255,25 @@ export default function Profilepage({ navigation }) {
             alignItems: "flex-start",
             paddingLeft: 30,
             borderColor: "#D9D9D9",
-            borderWidth: 1,
-            borderBottomWidth: 0,
-            borderBottomColor: "white",
+            borderBottomWidth: 1,
           }}
         >
           <TouchableOpacity
             style={{ flexDirection: "row", alignItems: "center" }}
           >
-            <View style={{ marginBottom: 10 }}>
+            <View
+              style={{
+                marginBottom: 10,
+                justifyContent: "center",
+                alignContent: "center",
+                alignItems: "center",
+                flexDirection: "row",
+              }}
+            >
               <Octicons name="arrow-switch" size={24} color="black" />
-            </View>
-            <View>
-              <Text style={{ marginLeft: 10 }}>Switch Account</Text>
+              <Text style={{ marginLeft: 10, fontSize: 16, fontWeight: "600" }}>
+                Switch Account
+              </Text>
             </View>
           </TouchableOpacity>
         </View>
@@ -233,19 +285,25 @@ export default function Profilepage({ navigation }) {
             alignItems: "flex-start",
             paddingLeft: 30,
             borderColor: "#D9D9D9",
-            borderWidth: 1,
-            borderBottomWidth: 0,
-            borderBottomColor: "white",
+            borderBottomWidth: 1,
           }}
         >
           <TouchableOpacity
             style={{ flexDirection: "row", alignItems: "center" }}
           >
-            <View style={{ marginBottom: 10 }}>
+            <View
+              style={{
+                marginBottom: 10,
+                justifyContent: "center",
+                alignContent: "center",
+                alignItems: "center",
+                flexDirection: "row",
+              }}
+            >
               <Ionicons name="person-add-outline" size={24} color="black" />
-            </View>
-            <View>
-              <Text style={{ marginLeft: 10 }}>Add Account</Text>
+              <Text style={{ marginLeft: 10, fontSize: 16, fontWeight: "600" }}>
+                Add Account
+              </Text>
             </View>
           </TouchableOpacity>
         </View>
@@ -257,19 +315,25 @@ export default function Profilepage({ navigation }) {
             alignItems: "flex-start",
             paddingLeft: 30,
             borderColor: "#D9D9D9",
-            borderWidth: 1,
-            borderBottomWidth: 0,
-            borderBottomColor: "white",
+            borderBottomWidth: 1,
           }}
         >
           <TouchableOpacity
             style={{ flexDirection: "row", alignItems: "center" }}
           >
-            <View style={{ marginBottom: 10 }}>
+            <View
+              style={{
+                marginBottom: 10,
+                justifyContent: "center",
+                alignContent: "center",
+                alignItems: "center",
+                flexDirection: "row",
+              }}
+            >
               <SimpleLineIcons name="logout" size={24} color="black" />
-            </View>
-            <View>
-              <Text style={{ marginLeft: 10 }}>Log out</Text>
+              <Text style={{ marginLeft: 10, fontSize: 16, fontWeight: "600" }}>
+                Log out
+              </Text>
             </View>
           </TouchableOpacity>
         </View>
@@ -291,6 +355,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
+    backgroundColor: "#fff",
   },
   edutext: {
     fontSize: 17,

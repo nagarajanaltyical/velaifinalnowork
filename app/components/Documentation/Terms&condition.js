@@ -162,11 +162,12 @@ export default function Termscondition() {
             governing jurisdiction]. Any disp- utes arising out of or in
             connection with these terms and conditions shall be resolved by the
             courts of [insert governing jurisdiction].
-            <Text style={{ fontSize: 17 }}>10. Contact Us </Text>
-            <Text style={{ marginBottom: 10 }}>
-              If you have any questions or concerns about these terms and
-              conditions, please contact us at [insert contact information].
-            </Text>
+          </Text>
+
+          <Text style={{ fontSize: 17 }}>10. Contact Us </Text>
+          <Text style={{ marginBottom: 10 }}>
+            If you have any questions or concerns about these terms and
+            conditions, please contact us at [insert contact information].
           </Text>
         </View>
       </ScrollView>

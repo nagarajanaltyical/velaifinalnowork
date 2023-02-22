@@ -20,6 +20,8 @@ import { AntDesign } from "@expo/vector-icons";
 import { FontAwesome, Ionicons } from "@expo/vector-icons";
 import { FontAwesome5, Entypo } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { AuthContext } from "../../App";
+
 import { PanGestureHandler } from "react-native-gesture-handler";
 import { MaterialIcons } from "@expo/vector-icons";
 import { SimpleLineIcons } from "@expo/vector-icons";
@@ -31,7 +33,11 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import Swipeable from "react-native-gesture-handler/Swipeable";
 import { Transitioning, Transition } from "react-native-reanimated";
-import { TouchableOpacity, TouchableHighlight } from "react-native";
+import {
+  TouchableOpacity,
+  TouchableHighlight,
+  TouchableWithoutFeedback,
+} from "react-native";
 import { useContext } from "react";
 import { useNavigation } from "@react-navigation/native";
 
@@ -78,12 +84,79 @@ export default function LongtimeSwiperCard({ route }) {
   const navigation = useNavigation();
 
   const [index, setIndex] = React.useState(0);
-  const [data, setData] = useState({});
+  const [data, setData] = useState([]);
   const [postId, setpostId] = useState({});
   const [address, setaddress] = useState(null);
   const [loading, setloading] = useState(true);
   const [search, setSearch] = useState("");
 
+  //to get  or check the handlelike
+  const handleLikeButtonPress = (card) => {
+    const newCards = data.map((c) => {
+      if (c.id === card.id) {
+        fetchdata(4, card.id);
+        console.log(card);
+        return { ...c, liked: c.liked == "true" ? "false" : "true" };
+      } else {
+        return c;
+      }
+    });
+    setData(newCards);
+  };
+
+  async function fetchdata(paras1, paras2) {
+    const body = {};
+    body.l_id = paras2;
+    body.user_id = paras1;
+    console.log(body);
+    try {
+      await fetch("http://192.168.1.2:5000/api/l_like_job", {
+        method: "post", // *GET, POST, PUT, DELETE, etc.
+        mode: "cors", // no-cors, *cors, same-origin
+        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: "same-origin", // include, *same-origin, omit
+        headers: {
+          "Content-Type": "application/json",
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: JSON.stringify(body),
+      })
+        .then((response) => response.json())
+        .then((result) => {
+          console.log("immmmm");
+          console.log(result);
+        });
+    } catch (error) {
+      console.warn(error);
+    }
+  }
+
+  async function setapplied(paras1, paras2) {
+    const body = {};
+    body.l_p_id = paras2;
+    body.user_id = paras1;
+    console.log(body);
+    try {
+      await fetch("http://192.168.1.2:5000/api/longtime_apply_job", {
+        method: "post", // *GET, POST, PUT, DELETE, etc.
+        mode: "cors", // no-cors, *cors, same-origin
+        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: "same-origin", // include, *same-origin, omit
+        headers: {
+          "Content-Type": "application/json",
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: JSON.stringify(body),
+      })
+        .then((response) => response.json())
+        .then((result) => {
+          console.log("immmmm");
+          console.log(result);
+        });
+    } catch (error) {
+      console.warn(error);
+    }
+  }
   //getting a user Location takes time so i need to wait so i make a async function
   const getPermission = async () => {
     //we use foreround permission for gettin Permission inside the app
@@ -169,21 +242,24 @@ export default function LongtimeSwiperCard({ route }) {
     getJobs();
   }, []);
   const getdata = async () => {
+    const body = {};
+    body.page = 0;
     try {
-      await fetch("http://192.168.1.5:5000/api/poster/show", {
-        method: "GET",
+      await fetch("http://192.168.1.2:5000/api/limit/L_like_apply_check/4", {
+        method: "POST",
         mode: "cors",
         cache: "no-cache",
         credentials: "same-origin",
         headers: {
           "Content-Type": "application/json",
         },
+        body: JSON.stringify(body),
       })
         .then((response) => response.json())
         .then((result) => {
           console.log("post result");
           console.log(result);
-          setData(result);
+          setData(result["long"]);
           setloading(false);
         });
     } catch (error) {
@@ -224,6 +300,30 @@ export default function LongtimeSwiperCard({ route }) {
     setIndex(Math.floor(Math.random() * data.length - 1) + 1);
   };
   const Card = ({ card }) => {
+    const { state, dispatch } = useContext(AuthContext);
+
+    console.log(state);
+    console.log("im after");
+    const handlenavigation = (paras) => {
+      console.log("im at navigatioon");
+      console.log(state);
+      if (state.userdeatils) {
+        console.log("you already applied");
+        // console.log(userDetails);
+        const newCards = data.map((c) => {
+          if (c.id === paras.id) {
+            setapplied(4, card.id);
+            console.log(card);
+            return { ...c, apply: "True" };
+          } else {
+            return c;
+          }
+        });
+        setData(newCards);
+      } else {
+        navigation.navigate("Userprofile");
+      }
+    };
     if (loading) {
       console.log(loading);
       return (
@@ -238,20 +338,21 @@ export default function LongtimeSwiperCard({ route }) {
         horizontal={false}
         decelerationRate={0}
       >
-        <TouchableHighlight
-          hitSlop={{ top: 20, bottom: -1100, left: -500, right: -500 }}
+        <TouchableWithoutFeedback
+          hitSlop={{ top: 20, bottom: -1100, left: -1100, right: -1000 }}
         >
           <View style={styles.card}>
             <View
               style={{
                 marginTop: 20,
-                position: "absolute",
+                // position: "absolute",
                 alignContent: "center",
                 marginHorizontal: 10,
+                width: 200,
               }}
             >
               <Text style={{ color: "#333", fontWeight: "700", fontSize: 25 }}>
-                {data[index].job}
+                {data[index].job_title}
               </Text>
               {/* <Text style={{ color: "#333" }}>
                 <SimpleLineIcons
@@ -277,7 +378,20 @@ export default function LongtimeSwiperCard({ route }) {
               >
                 {/* <FontAwesome name="rupee" size={16} color="#000000" />
                 {data[index].payment} */}
-                <AntDesign name="hearto" size={34} color="black" />
+                <TouchableOpacity
+                  onPress={() => {
+                    handleLikeButtonPress(data[index]);
+                    console.log("im at the like ", data[index].liked);
+                  }}
+                >
+                  {data[index].liked == "true" ? (
+                    <AntDesign name="heart" size={24} color="black" />
+                  ) : (
+                    <AntDesign name="hearto" size={24} color="black" />
+                  )}
+
+                  {/* <AntDesign name="hearto" size={34} color="black" /> */}
+                </TouchableOpacity>
               </Text>
               {/* <Text
                 style={{ color: "#000000", fontSize: 15, fontWeight: "600" }}
@@ -302,8 +416,8 @@ export default function LongtimeSwiperCard({ route }) {
               </Text> */}
               <FontAwesome name="share-alt" size={34} color="#333" />
             </View>
-            <View style={{}}>
-              {data[index].post_pic === null ? (
+            <View>
+              {data[index].pic === null ? (
                 <Image
                   source={{
                     uri: "https://images.pexels.com/photos/442559/pexels-photo-442559.jpeg?auto=compress&cs=tinysrgb&w=600",
@@ -312,8 +426,8 @@ export default function LongtimeSwiperCard({ route }) {
                     height: 250,
                     width: "100%",
                     backgroundColor: "#6BC3FF",
-                    marginTop: 70,
-                    marginBottom: 100,
+                    marginTop: 10,
+                    // marginBottom: 100,
                     borderRadius: 10,
                     resizeMode: "contain",
                     position: "relative",
@@ -322,14 +436,14 @@ export default function LongtimeSwiperCard({ route }) {
               ) : (
                 <Image
                   source={{
-                    uri: data[index].post_pic,
+                    uri: data[index].jobpic,
                   }}
                   style={{
                     height: 250,
                     width: "100%",
                     backgroundColor: "#6BC3FF",
-                    marginTop: 70,
-                    marginBottom: 140,
+                    marginTop: 10,
+                    // marginBottom: 140,
                     borderRadius: 10,
                     resizeMode: "cover",
                     position: "relative",
@@ -339,8 +453,8 @@ export default function LongtimeSwiperCard({ route }) {
             </View>
             <View
               style={{
-                marginTop: 340,
-                position: "absolute",
+                // marginTop: 340,
+                // position: "absolute",
                 marginHorizontal: 10,
                 flexDirection: "column",
               }}
@@ -361,57 +475,81 @@ export default function LongtimeSwiperCard({ route }) {
                 >
                   {t("posted")}
                 </Text>
-                <Image
-                  source={{
-                    uri: "https://images.pexels.com/photos/442559/pexels-photo-442559.jpeg?auto=compress&cs=tinysrgb&w=600",
-                  }}
-                  style={{
-                    backgroundColor: "purple",
-                    width: 55,
-                    height: 55,
-                    marginTop: 25,
+                {data[index].profilepic === null ? (
+                  <Image
+                    source={{
+                      uri: "https://images.pexels.com/photos/442559/pexels-photo-442559.jpeg?auto=compress&cs=tinysrgb&w=600",
+                    }}
+                    style={{
+                      backgroundColor: "purple",
+                      width: 55,
+                      height: 55,
+                      marginTop: 35,
 
-                    borderRadius: 50,
-                    resizeMode: "cover",
-                    borderColor: "#6BC3FF",
-                    borderWidth: 1,
-                  }}
-                />
+                      borderRadius: 50,
+                      resizeMode: "contain",
+                      borderColor: "#6BC3FF",
+                      borderWidth: 1,
+                    }}
+                  />
+                ) : (
+                  <Image
+                    source={{
+                      uri: data[index].profilepic,
+                    }}
+                    style={{
+                      backgroundColor: "purple",
+                      width: 55,
+                      height: 55,
+                      marginTop: 35,
+
+                      borderRadius: 50,
+                      resizeMode: "contain",
+                      borderColor: "#6BC3FF",
+                      borderWidth: 1,
+                    }}
+                  />
+                )}
               </View>
               <View
                 style={{
                   marginLeft: 70,
                   marginTop: 30,
-                  justifyContent: "space-between",
+                  // justifyContent: "space-between",
                   flexDirection: "row",
-                  width: 280,
+                  width: 200,
                 }}
               >
                 <View style={{ flexDirection: "column" }}>
-                  <Text
-                    style={{
-                      color: "#333",
-                      fontSize: 18,
-                      fontWeight: "900",
-                      justifyContent: "center",
-                      alignContent: "center",
-                    }}
-                  >
-                    {data[index].first_name}
-                  </Text>
-                  <Text> Former</Text>
+                  <View style={{ flexDirection: "row" }}>
+                    <Text
+                      style={{
+                        color: "#333",
+                        fontSize: 18,
+                        width: "90%",
+                        fontWeight: "900",
+                        justifyContent: "center",
+                        alignContent: "center",
+                      }}
+                    >
+                      {data[index].username}
+                    </Text>
+                    <View style={{ marginLeft: 30 }}>
+                      <TouchableOpacity
+                        onPress={() => navigation.navigate("messagefake")}
+                      >
+                        <AntDesign name="message1" size={40} color="black" />
+                      </TouchableOpacity>
+                    </View>
+                  </View>
+                  <Text> {data[index].job_title}</Text>
                 </View>
-
-                <Text
-                  style={{
-                    marginTop: -15,
-                  }}
-                >
-                  <AntDesign name="message1" size={40} color="black" />
-                </Text>
               </View>
             </View>
-            <LinearGradient colors={["#e9eef0", "#e9eef0"]}>
+            <LinearGradient
+              colors={["#e9eef0", "#e9eef0"]}
+              style={{ marginTop: 30 }}
+            >
               <View
                 key={data[index].id}
                 style={{
@@ -420,9 +558,6 @@ export default function LongtimeSwiperCard({ route }) {
                   position: "relative",
                 }}
               >
-                {/* <Text style={[styles.text, styles.heading]}>
-                  {data[index].name}
-                </Text> */}
                 <View
                   style={{
                     flexDirection: "row",
@@ -433,196 +568,226 @@ export default function LongtimeSwiperCard({ route }) {
                   <View
                     style={{
                       flexDirection: "column",
-                      justifyContent: "flex-start",
                       width: 150,
                     }}
                   >
                     <View
                       style={{
-                        flexDirection: "row",
+                        borderColor: "#707070",
+                        borderWidth: 1,
                         marginBottom: 10,
-                        alignContent: "center",
-                      }}
-                    >
-                      <FontAwesome name="rupee" size={22} color="#333" />
-                      <Text
-                        style={{
-                          // marginTop: 3,
 
-                          marginLeft: 10,
-                          fontSize: 13,
-                          fontWeight: "400",
+                        borderRadius: 20,
+                      }}
+                    >
+                      <View
+                        style={{
+                          justifyContent: "center",
+
+                          flexDirection: "row",
+                          marginHorizontal: 10,
+
+                          alignContent: "center",
                         }}
                       >
-                        Rs.1000/day
-                      </Text>
+                        <FontAwesome name="rupee" size={22} color="#333" />
+                        <Text
+                          style={{
+                            // marginTop: 3,
+
+                            marginLeft: 10,
+                            fontSize: 14,
+                            fontWeight: "400",
+                          }}
+                        >
+                          {data[index].Salary}/{data[index].per}
+                        </Text>
+                      </View>
                     </View>
                     <View
                       style={{
-                        flexDirection: "row",
+                        borderColor: "#707070",
+                        borderWidth: 1,
                         marginBottom: 10,
-                        width: 150,
-                        alignContent: "center",
+
+                        borderRadius: 20,
                       }}
                     >
-                      <MaterialCommunityIcons
-                        name="timer-sand"
-                        size={24}
-                        color="#333"
-                      />
-                      <Text
+                      <View
                         style={{
-                          marginLeft: 10,
-                          fontSize: 13,
-                          fontWeight: "400",
+                          justifyContent: "center",
+
+                          flexDirection: "row",
+                          marginHorizontal: 10,
+
+                          alignContent: "center",
                         }}
                       >
-                        5 Days
-                      </Text>
+                        <MaterialCommunityIcons
+                          name="timer-sand"
+                          size={22}
+                          color="#333"
+                        />
+                        <Text
+                          style={{
+                            marginLeft: 10,
+                            fontSize: 14,
+                            fontWeight: "400",
+                          }}
+                        >
+                          {data[index].Duration}
+                        </Text>
+                      </View>
                     </View>
                     <View
                       style={{
-                        flexDirection: "row",
+                        borderColor: "#707070",
+                        borderWidth: 1,
                         marginBottom: 10,
-                        width: 150,
-                        alignContent: "center",
+
+                        borderRadius: 20,
                       }}
                     >
-                      <SimpleLineIcons
-                        name="graduation"
-                        size={24}
-                        color="#333"
-                      />
-                      <Text
+                      <View
                         style={{
-                          marginLeft: 10,
-                          fontSize: 13,
-                          fontWeight: "400",
+                          justifyContent: "center",
+
+                          flexDirection: "row",
+                          marginHorizontal: 10,
+
+                          alignContent: "center",
                         }}
                       >
-                        Non-Mandatory
-                      </Text>
+                        <SimpleLineIcons
+                          name="graduation"
+                          size={24}
+                          color="#333"
+                        />
+                        <Text
+                          style={{
+                            marginLeft: 10,
+                            fontSize: 14,
+                            fontWeight: "400",
+                          }}
+                        >
+                          {data[index].Duration}
+                        </Text>
+                      </View>
                     </View>
                   </View>
                   <View
                     style={{
                       flexDirection: "column",
-                      justifyContent: "flex-start",
                       marginLeft: 3,
                     }}
                   >
                     <View
                       style={{
-                        flexDirection: "row",
+                        borderColor: "#707070",
+                        borderWidth: 1,
+                        borderRadius: 20,
                         marginBottom: 10,
-                        width: 180,
-                        alignContent: "center",
                       }}
                     >
-                      <Ionicons
-                        name="location-outline"
-                        size={24}
-                        color="#333"
-                      />
-                      <Text
+                      <View
                         style={{
-                          marginLeft: 10,
-                          fontSize: 13,
-                          fontWeight: "400",
+                          justifyContent: "center",
+                          flexDirection: "row",
+                          // marginBottom: 10,
+                          width: 150,
+                          marginHorizontal: 10,
+                          alignContent: "center",
                         }}
                       >
-                        Adyar, Chennai
-                      </Text>
+                        <Ionicons
+                          name="location-outline"
+                          size={22}
+                          color="#333"
+                        />
+                        <Text
+                          style={{
+                            marginLeft: 10,
+                            fontSize: 14,
+                            fontWeight: "400",
+                          }}
+                        >
+                          {data[index].location}
+                        </Text>
+                      </View>
                     </View>
                     <View
                       style={{
-                        alignContent: "center",
+                        borderColor: "#707070",
+                        borderWidth: 1,
+                        marginBottom: 10,
 
-                        flexDirection: "row",
-                        marginBottom: 10,
-                        width: 180,
+                        borderRadius: 20,
                       }}
                     >
-                      <MaterialCommunityIcons
-                        name="map-marker-distance"
-                        size={22}
-                        color="#333"
-                      />
-                      <Text
+                      <View
                         style={{
-                          marginLeft: 10,
-                          fontSize: 13,
-                          fontWeight: "400",
+                          justifyContent: "center",
+                          flexDirection: "row",
+                          // marginBottom: 10,
+                          width: 150,
+                          marginHorizontal: 10,
+                          alignContent: "center",
                         }}
                       >
-                        2.5 Km
-                      </Text>
+                        <MaterialCommunityIcons
+                          name="map-marker-distance"
+                          size={22}
+                          color="#333"
+                        />
+                        <Text
+                          style={{
+                            marginLeft: 10,
+                            fontSize: 14,
+                            fontWeight: "400",
+                          }}
+                        >
+                          {data[index].distance} km
+                        </Text>
+                      </View>
                     </View>
                     <View
                       style={{
-                        flexDirection: "row",
-                        alignContent: "center",
-                        width: 180,
+                        borderColor: "#707070",
+                        borderWidth: 1,
                         marginBottom: 10,
+
+                        borderRadius: 20,
                       }}
                     >
-                      <MaterialCommunityIcons
-                        name="bag-personal-outline"
-                        size={20}
-                        color="#333"
-                      />
-                      <Text
+                      <View
                         style={{
-                          marginLeft: 10,
-                          fontSize: 13,
-                          fontWeight: "400",
+                          justifyContent: "center",
+                          flexDirection: "row",
+                          // marginBottom: 10,
+                          width: 150,
+                          marginHorizontal: 10,
+                          alignContent: "center",
                         }}
                       >
-                        Fresher
-                      </Text>
+                        <MaterialCommunityIcons
+                          name="bag-personal-outline"
+                          size={20}
+                          color="#333"
+                        />
+                        <Text
+                          style={{
+                            marginLeft: 10,
+                            fontSize: 13,
+                            fontWeight: "400",
+                          }}
+                        >
+                          Fresher
+                        </Text>
+                      </View>
                     </View>
                   </View>
                 </View>
 
-                {/* <View>
-                  {console.log(data[index].post_id)}
-                  <TouchableOpacity
-                    onPress={() => postData(data[index].post_id)}
-                  >
-                    <LinearGradient
-                      colors={["#6BC3FF", "#1da1f2"]}
-                      style={{
-                        justifyContent: "center",
-                        alignItems: "center",
-                        padding: 10,
-                        borderRadius: 30,
-                        width: "50%",
-                        marginLeft: 90,
-                      }}
-                    >
-                      <Text
-                        style={{
-                          color: "white",
-                          fontSize: language == "ta" ? 13 : 16,
-                          fontWeight: "600",
-                        }}
-                      >
-                        {checkpost(data[index].post_id, postId)
-                          ? "Applied"
-                          : t("apply")}
-                      </Text>
-                    </LinearGradient>
-                  </TouchableOpacity>
-                  <Text
-                    style={{
-                      height: 2,
-                      width: 350,
-                      marginLeft: 20,
-                      backgroundColor: "#727a83",
-                      marginTop: 30,
-                    }}
-                  ></Text>
-                </View> */}
                 <View>
                   <Text
                     style={{
@@ -643,7 +808,7 @@ export default function LongtimeSwiperCard({ route }) {
                       color: "#626262",
                     }}
                   >
-                    {data[index].Description}
+                    {data[index].job_description}
                   </Text>
                   <View style={{ flex: 1, marginTop: 5 }}>
                     <Image
@@ -684,7 +849,9 @@ export default function LongtimeSwiperCard({ route }) {
                       justifyContent: "space-between",
                     }}
                   >
-                    <TouchableOpacity>
+                    <TouchableOpacity
+                      onPress={() => handleCallclick(data[index])}
+                    >
                       <LinearGradient
                         colors={["#16323B", "#1F4C5B", "#1E5966", "#16323B"]}
                         style={{
@@ -730,7 +897,13 @@ export default function LongtimeSwiperCard({ route }) {
                         {data[index].Duration2}
                       </Text>
                     </LinearGradient> */}
-                    <TouchableOpacity>
+                    <TouchableOpacity
+                      onPress={() => {
+                        // navigation.navigate("Userprofile");
+                        handlenavigation(data[index]);
+                      }}
+                      disabled={data[index].apply == "True"}
+                    >
                       <LinearGradient
                         colors={["#16323B", "#1F4C5B", "#1E5966", "#16323B"]}
                         style={{
@@ -738,6 +911,7 @@ export default function LongtimeSwiperCard({ route }) {
                           width: 160,
                           borderRadius: 10,
                           marginTop: 30,
+                          opacity: data[index].apply == "True" ? 0.5 : 1,
                           justifyContent: "center",
                           alignItems: "center",
                           flexDirection: "row",
@@ -753,7 +927,9 @@ export default function LongtimeSwiperCard({ route }) {
                             fontWeight: "600",
                           }}
                         >
-                          Apply Now
+                          {data[index].apply == "True"
+                            ? "Applied"
+                            : "Apply Now"}
                         </Text>
                       </LinearGradient>
                     </TouchableOpacity>
@@ -852,60 +1028,75 @@ export default function LongtimeSwiperCard({ route }) {
               </View>
             </LinearGradient>
           </View>
-        </TouchableHighlight>
+        </TouchableWithoutFeedback>
       </Animated.ScrollView>
     );
+  };
+  const [swipedAll, setSwipedAll] = useState(false);
+
+  const handleOnSwipedAll = () => {
+    console.log("I get the daata");
+    if (!swipedAll) {
+      // setloading(true);
+      // getdata1(page);
+      console.log("i get the data");
+      console.log(data);
+      Alert.alert("No more cards left!");
+      setSwipedAll(true);
+      getdata();
+      // Timeout used for show Ripples loader to remove swiper container re-render glitch
+    }
   };
 
   return (
     <View style={{ flex: 1 }}>
       {/* <Top /> */}
       {/* <SearchBar /> */}
-      <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+      {/* <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
         <TouchableOpacity onPress={() => navigation.navigate("tophome")}>
           <AntDesign name="doubleleft" size={24} color="black" />
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate("filter")}>
-          <FontAwesome5 name="filter" size={24} color="black" />
-        </TouchableOpacity>
-      </View>
+      </View> */}
 
-      <View
-        style={{
-          width: 280,
-          height: 35,
-          borderWidth: 1,
-          // paddingLeft: 20,
-          // margin: 5,
-
-          justifyContent: "space-evenly",
-          flexDirection: "row",
-          borderRadius: 20,
-          // marginLeft: 200,
-          borderColor: "#707070",
-          backgroundColor: "#fffff",
-          marginHorizontal: 55,
-          marginVertical: 15,
-        }}
-      >
-        <View style={{ justifyContent: "center" }}>
-          <EvilIcons name="search" size={24} color="#707070" />
-        </View>
-        <TextInput
-          value={search}
-          underlineColorAndroid="transparent"
-          placeholder="Search here"
-          style={{ marginLeft: 10 }}
-        />
+      <TouchableOpacity onPress={() => navigation.navigate("Longtimefilter")}>
         <View
           style={{
-            marginLeft: 130,
-            marginTop: 5,
+            width: 280,
+            height: 35,
+            borderWidth: 1,
+            // paddingLeft: 20,
+            // margin: 5,
+
+            justifyContent: "space-evenly",
+            flexDirection: "row",
+            borderRadius: 20,
+            // marginLeft: 200,
+            borderColor: "#707070",
+            backgroundColor: "#fffff",
+            marginHorizontal: 59,
+            marginVertical: 15,
           }}
         >
-          <FontAwesome name="microphone" size={24} color="#707070" />
+          <View style={{ justifyContent: "center" }}>
+            <EvilIcons name="search" size={24} color="#707070" />
+          </View>
+          <TextInput
+            value={search}
+            underlineColorAndroid="transparent"
+            placeholder="Search here"
+            style={{ marginLeft: 10 }}
+          />
+          <View
+            style={{
+              marginLeft: 130,
+              marginTop: 5,
+            }}
+          >
+            <FontAwesome name="microphone" size={24} color="#707070" />
+          </View>
         </View>
-      </View>
+      </TouchableOpacity>
+
       <View style={styles.container}>
         <StatusBar hidden={false} />
         <Swiper
@@ -913,7 +1104,6 @@ export default function LongtimeSwiperCard({ route }) {
           cards={data}
           cardIndex={index}
           renderCard={(card) => <Card card={card} />}
-          infinite
           backgroundColor={"transparent"}
           cardVerticalMargin={1}
           cardHorizontalMargin={3}

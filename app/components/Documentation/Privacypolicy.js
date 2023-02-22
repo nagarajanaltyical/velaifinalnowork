@@ -10,7 +10,13 @@ import {
   Image,
   ScrollView,
 } from "react-native";
-import { EvilIcons, FontAwesome } from "@expo/vector-icons";
+import { Entypo } from "@expo/vector-icons";
+import {
+  EvilIcons,
+  FontAwesome,
+  FontAwesome5,
+  Octicons,
+} from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
@@ -41,43 +47,6 @@ export default function Privacypolicy() {
             Privacy Policy
           </Text>
         </View>
-
-        {/* <View
-          style={{
-            width: 280,
-            height: 35,
-            borderWidth: 1,
-            // paddingLeft: 20,
-            // margin: 5,
-
-            justifyContent: "space-evenly",
-            flexDirection: "row",
-            borderRadius: 20,
-            // marginLeft: 200,
-            borderColor: "#707070",
-            backgroundColor: "#fffff",
-            marginHorizontal: 55,
-            marginVertical: 15,
-          }}
-        >
-          <View style={{ justifyContent: "center" }}>
-            <EvilIcons name="search" size={24} color="#707070" />
-          </View>
-          <TextInput
-            value={search}
-            underlineColorAndroid="transparent"
-            placeholder="Search here"
-            style={{ marginLeft: 10 }}
-          />
-          <View
-            style={{
-              marginLeft: 130,
-              marginTop: 5,
-            }}
-          >
-            <FontAwesome name="microphone" size={24} color="#707070" />
-          </View>
-        </View> */}
       </View>
 
       <ScrollView style={{ height: "80%" }}>
@@ -86,7 +55,7 @@ export default function Privacypolicy() {
             // justifyContent: "center",
             // alignContent: "center",
             // alignItems: "center",
-            marginHorizontal: 13,
+            marginHorizontal: 14,
           }}
         >
           <Text style={{ fontSize: 17 }}>1.Introduction </Text>
@@ -98,19 +67,67 @@ export default function Privacypolicy() {
           <Text style={{ fontSize: 17 }}> 2. Information We Collect </Text>
           <Text style={{ marginBottom: 10 }}>
             We collect personal information from users who register on our job
-            portal. This information includes: Name Contact information, such as
-            email address and phone number Employment history Education and
-            qualifications Professional skills and experience In addition to
-            this, we may also collect non-perso -nal information, such as job
+            portal. This information includes:
+          </Text>
+          <View
+            style={{
+              justifyContent: "center",
+              alignContent: "center",
+            }}
+          >
+            <Text>
+              <Octicons name="dot-fill" size={24} color="black" /> Name
+            </Text>
+            <Text>
+              <Octicons name="dot-fill" size={24} color="black" /> Contact
+              information, such as email address and phone number
+            </Text>
+            <Text>
+              <Octicons name="dot-fill" size={24} color="black" /> Employment
+              history
+            </Text>
+            <Text>
+              <Octicons name="dot-fill" size={24} color="black" /> Education and
+              qualifications
+            </Text>
+            <Text>
+              <Octicons name="dot-fill" size={24} color="black" /> Professional
+              skills and experience In addition to this.
+            </Text>
+          </View>
+          <Text style={{ marginBottom: 10 }}>
+            we may also collect non-perso -nal information, such as job
             preferences and search history.
           </Text>
           <Text style={{ fontSize: 17 }}>3. How We Use Your Information</Text>
           <Text style={{ marginBottom: 10 }}>
             We use the information that we collect for the following purposes:
-            To match job seekers with potential job oppor -tunities To
-            communicate with job seekers about job opportunities To improve our
-            job portal and user experience To comply with legal requirements We
-            may also use non-personal information to im -prove our job portal
+          </Text>
+          <View
+            style={{
+              justifyContent: "center",
+              alignContent: "center",
+            }}
+          >
+            <Text>
+              <Octicons name="dot-fill" size={24} color="black" /> To match job
+              seekers with potential job oppor -tunities
+            </Text>
+            <Text>
+              <Octicons name="dot-fill" size={24} color="black" /> To
+              communicate with job seekers about job opportunities
+            </Text>
+            <Text>
+              <Octicons name="dot-fill" size={24} color="black" /> To improve
+              our job portal and user experience
+            </Text>
+            <Text>
+              <Octicons name="dot-fill" size={24} color="black" /> To comply
+              with legal requirements
+            </Text>
+          </View>
+          <Text style={{ marginBottom: 10 }}>
+            We may also use non-personal information to im -prove our job portal
             and services.
           </Text>
           <Text style={{ fontSize: 17 }}>4. Sharing Your Information</Text>

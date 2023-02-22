@@ -38,10 +38,11 @@ import RentalposterMessagemain from "../Pages/message/Rentalpostermessage/Rental
 import RentalSwiperCard from "../Pages/Rental/Rentalswipe";
 import ShortTermForms from "../Pages/ShortTermform";
 import LongtimeSwiperCard from "../Swipe/Longtimeswipe";
+import { BottomTabBar } from "@react-navigation/bottom-tabs";
+
 import ShorttimeSwiperCard from "../Swipe/Shorttimeswipe";
 
 const Homestack = createNativeStackNavigator();
-
 function SettingsScreen({ route }) {
   // const Details = route.params.Details;
   // console.log("it is in setting top");
@@ -81,17 +82,17 @@ export function ModifyHome({ route }) {
   );
 }
 
-function LikedScreen() {
+function LikedScreen({ navigation }) {
   return (
     <View style={{ flex: 1 }}>
-      <Heart />
+      <Heart navigation={navigation} />
     </View>
   );
 }
-function ApplieScreen() {
+function ApplieScreen({ navigation }) {
   return (
     <View style={{ flex: 1 }}>
-      <Saved />
+      <Saved navigation={navigation} />
     </View>
   );
 }
@@ -169,7 +170,7 @@ function FilterScreenTabs() {
   );
 }
 
-export function filterscreenmain() {
+export function Filterscreenmain() {
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
       <FilterScreenTabs />
@@ -212,8 +213,9 @@ function MealsScreenTabs() {
     > */}
       <MealsTabs.Navigator
         screenOptions={{
-          // tabBarActiveTintColor​:"#fff",
+          tabBarActiveTintColor: "#fff",
           tabBarInactiveTintColor: "#333",
+          tabBarPressColor: "#707070",
           // showIcon: true,
           // scrollEnabled: false,
           // pressColor: "#e9eef0",
@@ -227,15 +229,15 @@ function MealsScreenTabs() {
             backgroundColor: "#1F4C5B",
             height: "100%",
             borderRadius: 10,
-            marginBottom: 8,
+            // marginBottom: 8,
             width: "50%",
           },
           tabBarStyle: {
             justifyContent: "center",
-
-            backgroundColor: "#fff",
-            // paddingTop: -10,
+            marginVertical: 10,
+            backgroundColor: "#FFF",
             marginHorizontal: 60,
+
             borderRadius: 10,
             height: 40,
             width: 280,
@@ -290,11 +292,10 @@ function SwipeMealsScreenTabs() {
     > */}
       <MealsTabs.Navigator
         screenOptions={{
-          swipeEnabled: false,
-          // tabBarActiveTintColor​:"#fff",
+          tabBarActiveTintColor: "#fff",
           tabBarInactiveTintColor: "#333",
+          tabBarPressColor: "#707070",
           // showIcon: true,
-          // scrollEnabled: false,
           // pressColor: "#e9eef0",
           // tabStyle: {
           //   borderRadius: 10,
@@ -309,26 +310,28 @@ function SwipeMealsScreenTabs() {
             // marginBottom: 8,
             width: "50%",
           },
+          swipeEnabled: false,
           tabBarStyle: {
             justifyContent: "center",
-            backgroundColor: "#fff",
-            paddingTop: -10,
+            marginVertical: 10,
+            backgroundColor: "#FFF",
             marginHorizontal: 60,
+
             borderRadius: 10,
             height: 40,
             width: 280,
           },
-          labelStyle: { fontSize: 14 },
+          // labelStyle: { fontSize: 14 },
         }}
         style={{ flex: 1, width: "100%", justifyContent: "center" }}
       >
         <MealsTabs.Screen
-          name="ShortTime Job"
-          component={SwipeMealsUpcomingScreen}
+          name="Short-Time Job"
+          component={SwipeMealsPastScreen}
         />
         <MealsTabs.Screen
-          name="Longtime Job"
-          component={SwipeMealsPastScreen}
+          name="Long-time Job"
+          component={SwipeMealsUpcomingScreen}
         />
       </MealsTabs.Navigator>
     </>
@@ -367,7 +370,6 @@ function JobposterMealsPastScreen({ route }) {
 function JobMealsScreenTabs() {
   return (
     <>
-      <Top />
       {/* <LinearGradient
       colors={["#16323B", "#1F4C5B", "#1E5966", "#16323B"]}
     style={{ flex: 1, width: "100%", justifyContent: "center" }}
@@ -450,7 +452,6 @@ function RentalseekrrMealsPastScreen({ route }) {
 function RentalseekerMealsScreenTabs() {
   return (
     <>
-      <Top />
       {/* <LinearGradient
       colors={["#16323B", "#1F4C5B", "#1E5966", "#16323B"]}
     style={{ flex: 1, width: "100%", justifyContent: "center" }}
@@ -532,7 +533,6 @@ function RentalposterMealsPastScreen({ route }) {
 function RentalposterMealsScreenTabs() {
   return (
     <>
-      <Top />
       {/* <LinearGradient
       colors={["#16323B", "#1F4C5B", "#1E5966", "#16323B"]}
     style={{ flex: 1, width: "100%", justifyContent: "center" }}
