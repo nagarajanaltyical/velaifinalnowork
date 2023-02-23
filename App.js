@@ -12,6 +12,7 @@ import { StyleSheet, View } from "react-native";
 import { AUthReducer, Inital_State } from "./app/Authreducer";
 
 import Jobmainselect from "./app/Pages/jobprovider/Jobtermchoose";
+import SwiperCard from "./app/Pages/Post";
 import translations from "./app/Pages/translations";
 import Root from "./app/Rootstack/Rootstack";
 import { doSomethingWithInput, changeLanguage } from "./app/util/util.js";

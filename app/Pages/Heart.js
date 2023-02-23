@@ -202,7 +202,41 @@ const Items = ({ title, sal, per, time, loc, Dis, name, short }) => (
               {Dis}
             </Text>
           </View>
-          <Text>{short == "False" ? "Long Time" : "Short Time"}</Text>
+          <LinearGradient
+            colors={["#16323B", "#1F4C5B", "#1E5966", "#16323B"]}
+            style={{
+              alignContent: "center",
+              borderRadius: 10,
+              width: 100,
+              height: 30,
+              marginLeft: 70,
+              justifyContent: "center",
+              alignItems: "center",
+              marginBottom: 14,
+            }}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 1 }}
+            useAngle={45}
+          >
+            {/* <View
+              style={{
+                borderTopWidth: 20,
+                backgroundColor: "red",
+                borderColor: "red",
+              }}
+            > */}
+
+            <Text
+              style={{
+                fontSize: 13,
+                color: "#fff",
+                fontWeight: "400",
+              }}
+            >
+              {short == "True" ? "Short Time" : "Long Time"}
+            </Text>
+            {/* </View> */}
+          </LinearGradient>
         </View>
       </View>
     </View>

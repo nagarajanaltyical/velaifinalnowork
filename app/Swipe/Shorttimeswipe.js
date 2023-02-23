@@ -1340,43 +1340,42 @@ export default function ShorttimeSwiperCard({ route }) {
   //   alert("hiiii");
   //   dispatch({ type: "IS_Deatils_given" });
   // };
+
   const onSwiped = () => {
     // console.log(data[index]);
     // console.log(data[index].apply);
-    // console.log(data);
+    console.log(data);
 
     transitionRef.current.animateNextTransition();
-    setIndex(index + 1);
-    if (index === 7) {
-      Alert.alert("hiiiiiiii");
-      getdata1(page);
+    if ((index) => 0) {
+      console.log("new page dynamic");
+      console.log(page);
+      setIndex(index + 1);
+      // console.log();
+      if (index === 7 * page) {
+        getdata1(page);
+      }
+    } else {
+      Alert.alert("please start the at the oppsite direction!");
     }
   };
-  const onSwipedLeft = () => {
-    // console.log(data[index]);
-    // console.log(data[index].apply);
-    // console.log(data);
 
-    console.log("left swipe");
-    transitionRef.current.animateNextTransition();
-    setIndex(index + 1);
-    // if (index === 7) {
-    //   Alert.alert("hiiiiiiii");
-    //   getdata1(page);
-    // }
-  };
   const onSwipedRight = () => {
     // console.log(data[index]);
     // console.log(data[index].apply);
     // console.log(data);
     transitionRef.current.animateNextTransition();
     console.log("Right swipe");
-
+    console.log(index);
     setIndex(index - 1);
     // if (index === 7) {
     //   Alert.alert("hiiiiiiii");
     //   getdata1(page);
     // }
+  };
+  const onChange2 = () => {
+    alert(workspacevalue);
+    console.log(workspacevalue);
   };
   const Card = ({ card }) => {
     const { state, dispatch } = useContext(AuthContext);
@@ -1460,7 +1459,7 @@ export default function ShorttimeSwiperCard({ route }) {
                 position: "absolute",
                 marginTop: 20,
                 marginLeft: 260,
-                justifyContent: "space-between",
+                justifyContent: "space-evenly",
                 width: "25%",
                 flexDirection: "row",
               }}
@@ -1477,9 +1476,9 @@ export default function ShorttimeSwiperCard({ route }) {
                   }}
                 >
                   {data[index].liked == "true" ? (
-                    <AntDesign name="heart" size={24} color="black" />
+                    <AntDesign name="heart" size={26} color="black" />
                   ) : (
-                    <AntDesign name="hearto" size={24} color="black" />
+                    <AntDesign name="hearto" size={26} color="black" />
                   )}
 
                   {/* <AntDesign name="hearto" size={34} color="black" /> */}
@@ -1506,7 +1505,7 @@ export default function ShorttimeSwiperCard({ route }) {
                 )} */}
               {/* KM
               </Text> */}
-              <FontAwesome name="share-alt" size={34} color="#333" />
+              <FontAwesome name="share-alt" size={26} color="#333" />
             </View>
             <View>
               {data[index].pic === null ? (
@@ -2145,12 +2144,14 @@ export default function ShorttimeSwiperCard({ route }) {
           cards={data}
           cardIndex={index}
           renderCard={(card) => <Card card={card} />}
-          infinite={true}
           backgroundColor={"transparent"}
           cardVerticalMargin={1}
           onTapCardDeadZone={5}
           cardHorizontalMargin={3}
-          onSwiped={onSwiped}
+          onSwiped={onSwipedRight}
+          disableLeftSwipe={index == 0 ? true : false}
+          onSwipedRight={onSwiped}
+          onSwipedAll={handleOnSwipedAll}
           useNativeDriver={true}
           stackSize={stackSize}
           swipeTop={false}
@@ -2169,7 +2170,7 @@ export default function ShorttimeSwiperCard({ route }) {
           inputOverlayLabelsOpacityRangeY={[0, 0]}
           outputOverlayLabelsOpacityRangeY={[1, 1]}
           verticalThreshold={100}
-          stackAnimationTension={40}
+          stackAnimationTension={30}
           stackAnimationFriction={7}
         />
 

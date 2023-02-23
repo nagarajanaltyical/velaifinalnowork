@@ -89,6 +89,7 @@ export default function LongtimeSwiperCard({ route }) {
   const [address, setaddress] = useState(null);
   const [loading, setloading] = useState(true);
   const [search, setSearch] = useState("");
+  const [page, setpage] = useState(0);
 
   //to get  or check the handlelike
   const handleLikeButtonPress = (card) => {
@@ -295,10 +296,38 @@ export default function LongtimeSwiperCard({ route }) {
   const getCOntent = () => {
     return <ActivityIndicator size="larger" />;
   };
-  const onSwiped = () => {
-    transitionRef.current.animateNextTransition();
-    setIndex(Math.floor(Math.random() * data.length - 1) + 1);
+  const getdata1 = async (paras) => {
+    const body = {};
+    body.page = paras;
+    try {
+      await fetch("http://192.168.1.2:5000/api/limit/L_like_apply_check/4", {
+        method: "POST",
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "same-origin",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      })
+        .then((response) => response.json())
+        .then((result) => {
+          console.log("post result");
+          console.log(result);
+          const updated = [...data, ...result["long"]];
+          console.log(updated);
+          // setnewcards();
+          // setData(result["short"]);
+          setData(updated);
+          console.log(data);
+          setpage(page + 1);
+          setloading(false);
+        });
+    } catch (error) {
+      console.log(error);
+    }
   };
+
   const Card = ({ card }) => {
     const { state, dispatch } = useContext(AuthContext);
 
@@ -368,7 +397,7 @@ export default function LongtimeSwiperCard({ route }) {
                 position: "absolute",
                 marginTop: 20,
                 marginLeft: 260,
-                justifyContent: "space-between",
+                justifyContent: "space-evenly",
                 width: "25%",
                 flexDirection: "row",
               }}
@@ -385,9 +414,9 @@ export default function LongtimeSwiperCard({ route }) {
                   }}
                 >
                   {data[index].liked == "true" ? (
-                    <AntDesign name="heart" size={24} color="black" />
+                    <AntDesign name="heart" size={26} color="black" />
                   ) : (
-                    <AntDesign name="hearto" size={24} color="black" />
+                    <AntDesign name="hearto" size={26} color="black" />
                   )}
 
                   {/* <AntDesign name="hearto" size={34} color="black" /> */}
@@ -414,7 +443,7 @@ export default function LongtimeSwiperCard({ route }) {
                 )} */}
               {/* KM
               </Text> */}
-              <FontAwesome name="share-alt" size={34} color="#333" />
+              <FontAwesome name="share-alt" size={26} color="#333" />
             </View>
             <View>
               {data[index].pic === null ? (
@@ -1032,6 +1061,38 @@ export default function LongtimeSwiperCard({ route }) {
       </Animated.ScrollView>
     );
   };
+
+  const onSwiped = () => {
+    console.log(data);
+
+    transitionRef.current.animateNextTransition();
+    if ((index) => 0) {
+      console.log("new page dynamic");
+      console.log(page);
+      setIndex(index + 1);
+      // console.log();
+      if (index === 7 * page) {
+        getdata1(page);
+      }
+    } else {
+      Alert.alert("please start the at the oppsite direction!");
+    }
+  };
+
+  const onSwipedRight = () => {
+    // console.log(data[index]);
+    // console.log(data[index].apply);
+    // console.log(data);
+    transitionRef.current.animateNextTransition();
+    console.log("Right swipe");
+    console.log(index);
+    setIndex(index - 1);
+    // if (index === 7) {
+    //   Alert.alert("hiiiiiiii");
+    //   getdata1(page);
+    // }
+  };
+
   const [swipedAll, setSwipedAll] = useState(false);
 
   const handleOnSwipedAll = () => {
@@ -1136,9 +1197,12 @@ export default function LongtimeSwiperCard({ route }) {
           cardVerticalMargin={1}
           onTapCardDeadZone={5}
           cardHorizontalMargin={3}
-          onSwiped={onSwiped}
           useNativeDriver={true}
           stackSize={stackSize}
+          onSwiped={onSwipedRight}
+          disableLeftSwipe={index == 0 ? true : false}
+          onSwipedRight={onSwiped}
+          onSwipedAll={handleOnSwipedAll}
           swipeTop={false}
           swipeBottom={false}
           stackScale={10}
@@ -1155,7 +1219,7 @@ export default function LongtimeSwiperCard({ route }) {
           inputOverlayLabelsOpacityRangeY={[0, 0]}
           outputOverlayLabelsOpacityRangeY={[1, 1]}
           verticalThreshold={100}
-          stackAnimationTension={40}
+          stackAnimationTension={30}
           stackAnimationFriction={7}
         />
 
