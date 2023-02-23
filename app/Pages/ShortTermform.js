@@ -21,6 +21,7 @@ import { FontAwesome } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 import { useForm, Controller } from "react-hook-form";
 import { ScrollView } from "react-native-gesture-handler";
+import { LinearGradient } from "expo-linear-gradient";
 
 const ShortTermForms = () => {
   const [genderOpen, setGenderOpen] = useState(false);
@@ -353,7 +354,6 @@ const ShortTermForms = () => {
           </View>
           <View></View>
         </View>
-
         <Text style={{ marginHorizontal: 10, color: "#333" }}> Add Image</Text>
         <TouchableOpacity
           onPress={() => {
@@ -413,7 +413,7 @@ const ShortTermForms = () => {
                     style={{
                       ...styles.openButton,
                       width: 150,
-                      backgroundColor: "#2196F3",
+                      backgroundColor: "#1E5966",
                     }}
                     onPress={() => {
                       takeAndUploadPhotoAsync("camera");
@@ -435,7 +435,7 @@ const ShortTermForms = () => {
                     style={{
                       ...styles.openButton,
                       width: 150,
-                      backgroundColor: "#2196F3",
+                      backgroundColor: "#1E5966",
                       marginTop: 20,
                     }}
                     onPress={() => takeAndUploadPhotoAsync("files")}
@@ -471,9 +471,27 @@ const ShortTermForms = () => {
             Allow candidates to call HR
           </Text>
         </View>
-        <TouchableOpacity onPress={handleSubmit(onSubmit)}>
-          <Text style={styles.getStarted}>Create Job</Text>
-        </TouchableOpacity>
+        <LinearGradient
+          colors={["#16323B", "#1F4C5B", "#1E5966", "#16323B"]}
+          style={{
+            // backgroundColor: isValid ? "#6BC3FF" : "#87CEEB",
+            alignItems: "center",
+            backgroundColor: "#5188E3",
+            color: "white",
+            textAlign: "center",
+            marginHorizontal: 60,
+            paddingVertical: 15,
+            borderRadius: 50,
+            marginTop: 20,
+          }}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 1 }}
+          useAngle={45}
+        >
+          <TouchableOpacity onPress={handleSubmit(onSubmit)}>
+            <Text style={{ color: "#fff" }}>Create Job</Text>
+          </TouchableOpacity>
+        </LinearGradient>
       </ScrollView>
     </View>
   );

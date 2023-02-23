@@ -22,6 +22,7 @@ import { FontAwesome } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 import { useForm, Controller } from "react-hook-form";
 import { ScrollView } from "react-native-gesture-handler";
+import { LinearGradient } from "expo-linear-gradient";
 
 const ShortTermRental = () => {
   const [genderOpen, setGenderOpen] = useState(false);
@@ -605,7 +606,7 @@ const ShortTermRental = () => {
                     style={{
                       ...styles.openButton,
                       width: 150,
-                      backgroundColor: "#2196F3",
+                      backgroundColor: "#1E5966",
                     }}
                     onPress={() => {
                       takeAndUploadPhotoAsync("camera");
@@ -627,7 +628,7 @@ const ShortTermRental = () => {
                     style={{
                       ...styles.openButton,
                       width: 150,
-                      backgroundColor: "#2196F3",
+                      backgroundColor: "#1E5966",
                       marginTop: 20,
                     }}
                     onPress={() => takeAndUploadPhotoAsync("files")}
@@ -648,10 +649,31 @@ const ShortTermRental = () => {
             </View>
           </View>
         </Modal>
-
-        <TouchableOpacity onPress={handleSubmit(onSubmit)}>
-          <Text style={styles.getStarted}>Create Job</Text>
-        </TouchableOpacity>
+        <LinearGradient
+          colors={["#16323B", "#1F4C5B", "#1E5966", "#16323B"]}
+          style={{
+            // backgroundColor: isValid ? "#6BC3FF" : "#87CEEB",
+            textAlign: "center",
+            marginHorizontal: 60,
+            paddingVertical: 15,
+            borderRadius: 15,
+            alignItems: "center",
+            marginTop: 20,
+          }}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 1 }}
+          useAngle={45}
+        >
+          <TouchableOpacity onPress={handleSubmit(onSubmit)}>
+            <Text
+              style={{
+                color: "#fff",
+              }}
+            >
+              Create Post
+            </Text>
+          </TouchableOpacity>
+        </LinearGradient>
       </ScrollView>
     </View>
   );
@@ -660,6 +682,7 @@ const ShortTermRental = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "#fff",
     marginHorizontal: 10,
     marginTop: 30,
   },

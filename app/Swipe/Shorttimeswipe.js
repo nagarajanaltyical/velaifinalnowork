@@ -2072,44 +2072,71 @@ export default function ShorttimeSwiperCard({ route }) {
   };
   return (
     <View style={{ flex: 1 }}>
-      <TouchableOpacity onPress={() => navigation.navigate("Shorttimefilter")}>
+      <View
+        style={{
+          justifyContent: "center",
+          alignItems: "center",
+          flexDirection: "row",
+        }}
+      >
         <View
           style={{
-            width: 280,
+            width: 270,
             height: 35,
             borderWidth: 1,
             // paddingLeft: 20,
             // margin: 5,
 
-            justifyContent: "space-evenly",
+            justifyContent: "space-around",
+            alignItems: "center",
             flexDirection: "row",
             borderRadius: 20,
             // marginLeft: 200,
             borderColor: "#707070",
             backgroundColor: "#fffff",
-            marginHorizontal: 55,
             marginVertical: 15,
           }}
         >
-          <View style={{ justifyContent: "center" }}>
-            <EvilIcons name="search" size={24} color="#707070" />
-          </View>
-          <TextInput
-            value={search}
-            underlineColorAndroid="transparent"
-            placeholder="Search here"
-            style={{ marginLeft: 10 }}
-          />
           <View
             style={{
-              marginLeft: 130,
-              marginTop: 5,
+              width: "80%",
+              justifyContent: "space-between",
+              flexDirection: "row",
+              alignItems: "center",
             }}
           >
-            <FontAwesome name="microphone" size={24} color="#707070" />
+            <View
+              style={{
+                // width: "60%",
+                flexDirection: "row",
+                alignItems: "center",
+              }}
+            >
+              <EvilIcons name="search" size={24} color="#707070" />
+              <TextInput
+                value={search}
+                underlineColorAndroid="transparent"
+                placeholder="Search here"
+                style={{ marginLeft: 10 }}
+              />
+            </View>
+            {/* <View
+              style={{
+                marginLeft: 130,
+                marginTop: 5,
+              }}
+            > */}
+            <FontAwesome name="microphone" size={25} color="#707070" />
+            {/* </View> */}
           </View>
         </View>
-      </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("Shorttimefilter")}
+          style={{ marginLeft: 10 }}
+        >
+          <MaterialIcons name="filter-list" size={30} color="#333" />
+        </TouchableOpacity>
+      </View>
 
       <View style={styles.container}>
         <StatusBar hidden={false} />

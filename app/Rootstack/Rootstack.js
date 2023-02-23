@@ -63,8 +63,11 @@ function CustomHeaderBackImage({ navigation }) {
         alignItems: "center",
       }}
     >
-      <Feather name="home" size={34} color="black" />
-      <Text>Home</Text>
+      <Image
+        resizeMode="contain"
+        style={{ height: 30, width: 30 }}
+        source={require("../images/home.png")}
+      />
     </View>
   );
 }
@@ -91,12 +94,146 @@ function Root({ navigation }) {
           component={BottomTAb}
           options={{ headerShown: false }}
         />
-        <Stack.Screen name="short" component={ShortTermForms} />
-        <Stack.Screen name="Long" component={Sign} />
+        <Stack.Screen
+          name="short"
+          component={ShortTermForms}
+          options={{
+            headerRight: (props) => (
+              <View style={{ flexDirection: "row", alignItems: "center" }}>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    marginLeft: "70%",
+                  }}
+                >
+                  <Ionicons name="md-globe-outline" size={24} color="#333" />
+                  <Pressable>
+                    <Text style={{ Text: 18, color: "#333" }}>EN</Text>
+                  </Pressable>
+                </View>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    alignItems: "center",
+                    marginHorizontal: 12,
+                  }}
+                >
+                  <Pressable onPress={() => setisvoice(!isvoice)}>
+                    {isvoice ? (
+                      <MaterialCommunityIcons
+                        name="account-voice"
+                        size={26}
+                        color="#333"
+                      />
+                    ) : (
+                      <MaterialCommunityIcons
+                        name="account-voice-off"
+                        size={24}
+                        color="black"
+                      />
+                    )}
+                  </Pressable>
+                </View>
+              </View>
+            ),
+            headerStyle: {
+              backgroundColor: "#fff",
+            },
+          }}
+        />
+        <Stack.Screen
+          name="Long"
+          component={Sign}
+          options={{
+            headerRight: (props) => (
+              <View style={{ flexDirection: "row", alignItems: "center" }}>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    marginLeft: "70%",
+                  }}
+                >
+                  <Ionicons name="md-globe-outline" size={24} color="#333" />
+                  <Pressable>
+                    <Text style={{ Text: 18, color: "#333" }}>EN</Text>
+                  </Pressable>
+                </View>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    alignItems: "center",
+                    marginHorizontal: 12,
+                  }}
+                >
+                  <Pressable onPress={() => setisvoice(!isvoice)}>
+                    {isvoice ? (
+                      <MaterialCommunityIcons
+                        name="account-voice"
+                        size={26}
+                        color="#333"
+                      />
+                    ) : (
+                      <MaterialCommunityIcons
+                        name="account-voice-off"
+                        size={24}
+                        color="black"
+                      />
+                    )}
+                  </Pressable>
+                </View>
+              </View>
+            ),
+            headerStyle: {
+              backgroundColor: "#fff",
+            },
+          }}
+        />
         <Stack.Screen
           name="Rent"
           component={ShortTermRental}
-          // options={{ headerShown: false }}
+          options={{
+            headerRight: (props) => (
+              <View style={{ flexDirection: "row", alignItems: "center" }}>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    marginLeft: "70%",
+                  }}
+                >
+                  <Ionicons name="md-globe-outline" size={24} color="#333" />
+                  <Pressable>
+                    <Text style={{ Text: 18, color: "#333" }}>EN</Text>
+                  </Pressable>
+                </View>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    alignItems: "center",
+                    marginHorizontal: 12,
+                  }}
+                >
+                  <Pressable onPress={() => setisvoice(!isvoice)}>
+                    {isvoice ? (
+                      <MaterialCommunityIcons
+                        name="account-voice"
+                        size={26}
+                        color="#333"
+                      />
+                    ) : (
+                      <MaterialCommunityIcons
+                        name="account-voice-off"
+                        size={24}
+                        color="black"
+                      />
+                    )}
+                  </Pressable>
+                </View>
+              </View>
+            ),
+            headerStyle: {
+              backgroundColor: "#fff",
+            },
+          }}
         />
         <Stack.Screen
           name="jobprovidebottamtab"
@@ -768,8 +905,47 @@ function Root({ navigation }) {
           name="eduexp"
           component={EduInfo}
           options={{
-            headerShown: true,
-            title: "Add your Educational Experience",
+            headerRight: (props) => (
+              <View style={{ flexDirection: "row", alignItems: "center" }}>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    marginLeft: "70%",
+                  }}
+                >
+                  <Ionicons name="md-globe-outline" size={24} color="#333" />
+                  <Pressable>
+                    <Text style={{ Text: 18, color: "#333" }}>EN</Text>
+                  </Pressable>
+                </View>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    alignItems: "center",
+                    marginHorizontal: 12,
+                  }}
+                >
+                  <Pressable onPress={() => setisvoice(!isvoice)}>
+                    {isvoice ? (
+                      <MaterialCommunityIcons
+                        name="account-voice"
+                        size={26}
+                        color="#333"
+                      />
+                    ) : (
+                      <MaterialCommunityIcons
+                        name="account-voice-off"
+                        size={24}
+                        color="black"
+                      />
+                    )}
+                  </Pressable>
+                </View>
+              </View>
+            ),
+            headerStyle: {
+              backgroundColor: "#fff",
+            },
           }}
         />
         {/* 
@@ -781,7 +957,49 @@ function Root({ navigation }) {
         <Stack.Screen
           name="workexp"
           component={Workexperience}
-          options={{ headerShown: true }}
+          options={{
+            headerRight: (props) => (
+              <View style={{ flexDirection: "row", alignItems: "center" }}>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    marginLeft: "70%",
+                  }}
+                >
+                  <Ionicons name="md-globe-outline" size={24} color="#333" />
+                  <Pressable>
+                    <Text style={{ Text: 18, color: "#333" }}>EN</Text>
+                  </Pressable>
+                </View>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    alignItems: "center",
+                    marginHorizontal: 12,
+                  }}
+                >
+                  <Pressable onPress={() => setisvoice(!isvoice)}>
+                    {isvoice ? (
+                      <MaterialCommunityIcons
+                        name="account-voice"
+                        size={26}
+                        color="#333"
+                      />
+                    ) : (
+                      <MaterialCommunityIcons
+                        name="account-voice-off"
+                        size={24}
+                        color="black"
+                      />
+                    )}
+                  </Pressable>
+                </View>
+              </View>
+            ),
+            headerStyle: {
+              backgroundColor: "#fff",
+            },
+          }}
         />
         <Stack.Screen
           name="register"

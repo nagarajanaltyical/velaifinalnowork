@@ -22,6 +22,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 import { useForm, Controller } from "react-hook-form";
 import { ScrollView } from "react-native-gesture-handler";
+import { LinearGradient } from "expo-linear-gradient";
 
 const Sign = () => {
   //gender
@@ -473,7 +474,7 @@ const Sign = () => {
                     style={{
                       ...styles.openButton,
                       width: 150,
-                      backgroundColor: "#2196F3",
+                      backgroundColor: "#1E5966",
                     }}
                     onPress={() => {
                       takeAndUploadPhotoAsync("camera");
@@ -495,7 +496,7 @@ const Sign = () => {
                     style={{
                       ...styles.openButton,
                       width: 150,
-                      backgroundColor: "#2196F3",
+                      backgroundColor: "#1E5966",
                       marginTop: 20,
                     }}
                     onPress={() => takeAndUploadPhotoAsync("files")}
@@ -516,9 +517,27 @@ const Sign = () => {
             </View>
           </View>
         </Modal>
-        <TouchableOpacity onPress={handleSubmit(onSubmit)}>
-          <Text style={styles.getStarted}>Create job</Text>
-        </TouchableOpacity>
+        <LinearGradient
+          colors={["#16323B", "#1F4C5B", "#1E5966", "#16323B"]}
+          style={{
+            // backgroundColor: isValid ? "#6BC3FF" : "#87CEEB",
+            alignItems: "center",
+            backgroundColor: "#5188E3",
+            color: "white",
+            textAlign: "center",
+            marginHorizontal: 60,
+            paddingVertical: 15,
+            borderRadius: 50,
+            marginTop: 20,
+          }}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 1 }}
+          useAngle={45}
+        >
+          <TouchableOpacity onPress={handleSubmit(onSubmit)}>
+            <Text style={{ color: "#fff" }}>Create job</Text>
+          </TouchableOpacity>
+        </LinearGradient>
       </ScrollView>
     </View>
   );

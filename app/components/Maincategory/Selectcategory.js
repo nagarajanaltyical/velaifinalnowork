@@ -44,20 +44,65 @@ export default function SelectCategory({ route }) {
   const [index, setIndex] = useState(0);
   const [imageData, setImageData] = useState([
     {
-      uri: "https://velai3.s3.ap-south-1.amazonaws.com/29/govt.png",
+      src: require("../../images/ChatGPT.png"),
+      title: "ChatGPT Image 1",
     },
     {
-      uri: "https://velai3.s3.ap-south-1.amazonaws.com/9/start-1-yellow.png",
+      src: require("../../images/Germanaid.png"),
+      title: "ChatGPT Image 2",
     },
     {
-      uri: "https://velai3.s3.ap-south-1.amazonaws.com/9/Start-2-yellow.png",
+      src: require("../../images/GovtJobs.png"),
+      title: "ChatGPT Image 3",
     },
   ]);
+  const [imageData2, setImageData2] = useState([
+    {
+      src: require("../../images/ChatGPT.png"),
+      title: "ChatGPT Image 1",
+    },
+    {
+      src: require("../../images/Germanaid.png"),
+      title: "ChatGPT Image 2",
+    },
+    {
+      src: require("../../images/GovtJobs.png"),
+      title: "ChatGPT Image 3",
+    },
+  ]);
+
   const CarouselItem = ({ item }) => {
     return (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
         <Image
-          source={{ uri: item.uri }}
+          source={item.src}
+          style={{
+            resizeMode: "contain",
+            width: "100%",
+            height: "100%",
+            marginTop: 140,
+            borderRadius: 20,
+          }}
+        />
+        <Text
+          style={{
+            bottom: 16,
+            fontSize: 50,
+            color: "red",
+            marginTop: 20,
+          }}
+        >
+          {item.title}
+        </Text>
+      </View>
+    );
+  };
+
+  const CarouselItem2 = ({ item }) => {
+    return (
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+        <Image
+          source={item.src}
           style={{
             resizeMode: "contain",
             width: "100%",
@@ -156,40 +201,42 @@ export default function SelectCategory({ route }) {
         </View>
       </View> */}
       <ScrollView>
-        <View
-          style={{
-            width: 280,
-            height: 35,
-            borderWidth: 1,
-            // paddingLeft: 20,
-            // margin: 5,
-
-            justifyContent: "space-evenly",
-            flexDirection: "row",
-            borderRadius: 20,
-            // marginLeft: 200,
-            borderColor: "#707070",
-            backgroundColor: "#fffff",
-            marginHorizontal: 55,
-            marginVertical: 15,
-          }}
-        >
-          <View style={{ justifyContent: "center" }}>
-            <EvilIcons name="search" size={24} color="#707070" />
-          </View>
-          <TextInput
-            value={search}
-            underlineColorAndroid="transparent"
-            placeholder="Search here"
-            style={{ marginLeft: 10 }}
-          />
+        <View style={{ justifyContent: "center", alignItems: "center" }}>
           <View
             style={{
-              marginLeft: 130,
-              marginTop: 5,
+              width: 280,
+              height: 35,
+              borderWidth: 1,
+              // paddingLeft: 20,
+              // margin: 5,
+
+              justifyContent: "space-evenly",
+              flexDirection: "row",
+              borderRadius: 20,
+              // marginLeft: 200,
+              borderColor: "#707070",
+              backgroundColor: "#fffff",
+              // marginHorizontal: 55,
+              marginVertical: 15,
             }}
           >
-            <FontAwesome name="microphone" size={24} color="#707070" />
+            <View style={{ justifyContent: "center" }}>
+              <EvilIcons name="search" size={24} color="#707070" />
+            </View>
+            <TextInput
+              value={search}
+              underlineColorAndroid="transparent"
+              placeholder="Search here"
+              style={{ marginLeft: 10 }}
+            />
+            <View
+              style={{
+                marginLeft: 130,
+                marginTop: 5,
+              }}
+            >
+              <FontAwesome name="microphone" size={24} color="#707070" />
+            </View>
           </View>
         </View>
 
@@ -451,10 +498,16 @@ export default function SelectCategory({ route }) {
             borderRadius: 20,
           }}
         >
-          {/* <Image
-            resizeMode="contain"
-            source={require("../Maincategory/Categoryimage/Rectangle.png")}
-            style={{ width: 40, height: 40 }}
+          {/* <Carousel
+            data={imageData2}
+            // autoPlay={true}
+            renderItem={({ item, index }) => (
+              <CarouselItem2 item={item} index={index} />
+            )}
+            // height={60}
+            width={100}
+            // // inactiveSlideScale={2}
+            autoplayInterval={100}
           /> */}
         </View>
         <View
@@ -499,9 +552,8 @@ export default function SelectCategory({ route }) {
             />
             <Text
               style={{
-                fontSize: 15,
+                fontSize: 13,
                 color: "#fff",
-                marginTop: 10,
                 fontWeight: "600",
               }}
             >
@@ -547,14 +599,13 @@ export default function SelectCategory({ route }) {
           >
             <Image
               resizeMode="contain"
-              source={require("../Maincategory/Categoryimage/Freelance.png")}
+              source={require("../../images/government.png")}
               style={{ width: 40, height: 40 }}
             />
             <Text
               style={{
-                fontSize: 15,
+                fontSize: 13,
                 color: "#fff",
-                marginTop: 10,
                 fontWeight: "600",
               }}
             >
@@ -600,18 +651,26 @@ export default function SelectCategory({ route }) {
           >
             <Image
               resizeMode="contain"
-              source={require("../Maincategory/Categoryimage/govt.png")}
+              source={require("../../images/freelance.png")}
               style={{ width: 40, height: 40 }}
             />
             <Text
               style={{
-                fontSize: 12,
+                fontSize: 13,
                 color: "#fff",
-                marginTop: 10,
                 fontWeight: "600",
               }}
             >
-              Government Job
+              Government
+            </Text>
+            <Text
+              style={{
+                fontSize: 13,
+                color: "#fff",
+                fontWeight: "600",
+              }}
+            >
+              Job
             </Text>
             {/* <Text
               style={{

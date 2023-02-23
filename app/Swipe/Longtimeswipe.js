@@ -771,7 +771,7 @@ export default function LongtimeSwiperCard({ route }) {
                       >
                         <MaterialCommunityIcons
                           name="bag-personal-outline"
-                          size={20}
+                          size={22}
                           color="#333"
                         />
                         <Text
@@ -836,7 +836,7 @@ export default function LongtimeSwiperCard({ route }) {
                         color: "#e33442",
                       }}
                     >
-                      Zomato
+                      Tomato
                     </Text>
                   </View>
                   <View
@@ -1058,44 +1058,71 @@ export default function LongtimeSwiperCard({ route }) {
         </TouchableOpacity>
       </View> */}
 
-      <TouchableOpacity onPress={() => navigation.navigate("Longtimefilter")}>
+      <View
+        style={{
+          justifyContent: "center",
+          alignItems: "center",
+          flexDirection: "row",
+        }}
+      >
         <View
           style={{
-            width: 280,
+            width: 270,
             height: 35,
             borderWidth: 1,
             // paddingLeft: 20,
             // margin: 5,
 
-            justifyContent: "space-evenly",
+            justifyContent: "space-around",
+            alignItems: "center",
             flexDirection: "row",
             borderRadius: 20,
             // marginLeft: 200,
             borderColor: "#707070",
             backgroundColor: "#fffff",
-            marginHorizontal: 59,
             marginVertical: 15,
           }}
         >
-          <View style={{ justifyContent: "center" }}>
-            <EvilIcons name="search" size={24} color="#707070" />
-          </View>
-          <TextInput
-            value={search}
-            underlineColorAndroid="transparent"
-            placeholder="Search here"
-            style={{ marginLeft: 10 }}
-          />
           <View
             style={{
-              marginLeft: 130,
-              marginTop: 5,
+              width: "80%",
+              justifyContent: "space-between",
+              flexDirection: "row",
+              alignItems: "center",
             }}
           >
-            <FontAwesome name="microphone" size={24} color="#707070" />
+            <View
+              style={{
+                // width: "60%",
+                flexDirection: "row",
+                alignItems: "center",
+              }}
+            >
+              <EvilIcons name="search" size={24} color="#707070" />
+              <TextInput
+                value={search}
+                underlineColorAndroid="transparent"
+                placeholder="Search here"
+                style={{ marginLeft: 10 }}
+              />
+            </View>
+            {/* <View
+              style={{
+                marginLeft: 130,
+                marginTop: 5,
+              }}
+            > */}
+            <FontAwesome name="microphone" size={25} color="#707070" />
+            {/* </View> */}
           </View>
         </View>
-      </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("Longtimefilter")}
+          style={{ marginLeft: 10 }}
+        >
+          <MaterialIcons name="filter-list" size={30} color="#333" />
+        </TouchableOpacity>
+      </View>
 
       <View style={styles.container}>
         <StatusBar hidden={false} />
@@ -1104,8 +1131,10 @@ export default function LongtimeSwiperCard({ route }) {
           cards={data}
           cardIndex={index}
           renderCard={(card) => <Card card={card} />}
+          infinite={true}
           backgroundColor={"transparent"}
           cardVerticalMargin={1}
+          onTapCardDeadZone={5}
           cardHorizontalMargin={3}
           onSwiped={onSwiped}
           useNativeDriver={true}
@@ -1116,11 +1145,16 @@ export default function LongtimeSwiperCard({ route }) {
           disableTopSwipe={false}
           stackSeparation={14}
           horizontalSwipe={true}
+          showSecondCard={false}
           verticalSwipe={false}
+          inputOverlayLabelsOpacityRangeX={[-300, 0, 300]}
+          outputOverlayLabelsOpacityRangeX={[1, 0, 1]}
           animateOverlayLabelsOpacity
           animateCardOpacity={false}
-          verticalThreshold={height / 5}
-          horizontalThreshold={width / 4}
+          horizontalThreshold={75}
+          inputOverlayLabelsOpacityRangeY={[0, 0]}
+          outputOverlayLabelsOpacityRangeY={[1, 1]}
+          verticalThreshold={100}
           stackAnimationTension={40}
           stackAnimationFriction={7}
         />
