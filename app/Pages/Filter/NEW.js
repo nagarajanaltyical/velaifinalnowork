@@ -28,6 +28,7 @@ import Education from "./Education";
 import Experiance from "./Experiance";
 import Company from "./ComapanySearch";
 import Post from "./Post";
+import { LinearGradient } from "expo-linear-gradient";
 
 const listTab = [
   {
@@ -227,6 +228,41 @@ export default function New(navigation) {
           renderItem={renderItem}
         />
       </View>
+      <View
+        style={{
+          alignItems: "center",
+        }}
+      >
+        <TouchableOpacity
+        // onPress={() => navigation.navigate("Userprofile")}
+        // style={{
+        //   backgroundColor: "green",
+        //   padding: 10,
+        //   borderRadius: 10,
+        // }}
+        >
+          <LinearGradient
+            colors={["#16323B", "#1F4C5B", "#1E5966", "#16323B"]}
+            style={{
+              height: 49,
+              width: 200,
+              justifyContent: "center",
+              alignItems: "center",
+              // marginHorizontal: 50,
+              borderRadius: 10,
+              // opacity: mobilenumber.length > 1 && !istick ? 1 : 0.5,
+              // marginTop: 30,
+            }}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 1 }}
+            useAngle={45}
+          >
+            <Text style={{ color: "#fff", fontSize: 18, fontWeight: "600" }}>
+              Apply Filter
+            </Text>
+          </LinearGradient>
+        </TouchableOpacity>
+      </View>
     </>
   );
 }
@@ -241,11 +277,77 @@ const renderItem = ({ item, index }) => {
 };
 
 const styles = StyleSheet.create({
+  //   container: {
+  //     flex: 1,
+  //     flexDirection: "row",
+  //     paddingHorizontal: 10,
+  //     justifyContent: "center",
+  //   },
+  //   listTab: {
+  //     borderColor: "#f5f5f5",
+  //     borderWidth: 2,
+  //     backgroundColor: "#fff",
+  //     flexDirection: "column",
+  //     justifyContent: "center",
+  //     alignItems: "center",
+  //     marginTop: 20,
+  //     marginLeft: 5,
+  //     borderRadius: 20,
+  //     // height: "60%",
+  //     // width: "30%",
+  //   },
+  //   btnTab: {
+  //     // width: 0,
+  //     // flexDirection: "column",
+  //     marginBottom: 5,
+  //     paddingHorizontal: 5,
+  //     paddingVertical: 3,
+  //     alignContent: "center",
+  //     alignItems: "center",
+  //     justifyContent: "center",
+  //   },
+  //   textTab: {
+  //     fontSize: 12,
+  //     flexDirection: "column",
+  //     justifyContent: "center",
+  //     alignItems: "center",
+  //     alignContent: "center",
+  //   },
+  //   iconTab: {
+  //     height: 40,
+  //     flexDirection: "column",
+  //     justifyContent: "center",
+  //     alignItems: "center",
+  //     alignContent: "center",
+  //   },
+  //   btnTabActive: {
+  //     backgroundColor: "#1E5966",
+  //     height: "10%",
+  //     borderRadius: 10,
+  //   },
+  //   textTabActive: {
+  //     color: "#333",
+  //   },
+  //   itemContainer: {
+  //     paddingVertical: 15,
+  //     height: "100%",
+  //     width: "100%",
+  //     flex: 1,
+  //     justifyContent: "center",
+  //     marginLeft: 30,
+  //     marginTop: 10,
+  //   },
+  //   itemName: {
+  //     fontWeight: "bold",
+  //     fontSize: 20,
+  //     marginBottom: 5,
+  //   },
+  // });
+
   container: {
     flex: 1,
     flexDirection: "row",
     paddingHorizontal: 10,
-    justifyContent: "center",
   },
   listTab: {
     borderColor: "#f5f5f5",
@@ -263,7 +365,7 @@ const styles = StyleSheet.create({
   btnTab: {
     // width: 0,
     // flexDirection: "column",
-    marginBottom: 5,
+    marginBottom: 10,
     paddingHorizontal: 5,
     paddingVertical: 3,
     alignContent: "center",
@@ -286,8 +388,7 @@ const styles = StyleSheet.create({
   },
   btnTabActive: {
     backgroundColor: "#1E5966",
-    height: "10%",
-    borderRadius: 10,
+    borderRadius: 5,
   },
   textTabActive: {
     color: "#333",
@@ -299,7 +400,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     marginLeft: 30,
-    marginTop: 10,
+    // marginTop: 10,
   },
   itemName: {
     fontWeight: "bold",

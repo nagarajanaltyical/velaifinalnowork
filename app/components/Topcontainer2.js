@@ -11,7 +11,7 @@ import DropDownLanguage2 from "./dropdown/DropDownlanguage2";
 import { useNavigation } from "@react-navigation/native";
 
 import { FontAwesome5 } from "@expo/vector-icons";
-export default function Top() {
+export default function Top2() {
   //To pass the location
   const [location, setLocation] = useState(null);
   const [loading, setiloading] = useState(true);
@@ -194,13 +194,13 @@ export default function Top() {
             />
           )}
         </Pressable>
-        {/* <Pressable
+        <Pressable
           onPress={() => {
             navigation.navigate("mainprofile");
           }}
         >
           <Ionicons name="person-circle-sharp" size={35} color="black" />
-        </Pressable> */}
+        </Pressable>
       </View>
       {/* <View style={{ marginTop: -12 }}> */}
       {/* <DropDownRole /> */}

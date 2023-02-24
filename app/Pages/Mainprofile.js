@@ -37,7 +37,7 @@ export default function Profilepage({ navigation }) {
           </View>
         </View>
       </View>
-      <ScrollView style={{ marginHorizontal: 20 }}>
+      <ScrollView style={{ marginHorizontal: 20 }} decelerationRate="fast">
         <View
           style={{
             height: 130,

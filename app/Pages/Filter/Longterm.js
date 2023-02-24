@@ -169,38 +169,76 @@ export default function Longterm({ navigation }) {
     setStatus(status);
   };
   return (
-    <SafeAreaView style={styles.container}>
+    <>
       <StatusBar style={"auto"} />
-      <View style={styles.listTab}>
-        {listTab.map((e) => {
-          return (
-            <TouchableOpacity
-              style={[
-                styles.btnTab,
-                status === e.status && styles.btnTabActive,
-              ]}
-              onPress={() => setStatusFilter(e.status)}
-            >
-              <Text
+
+      <View style={styles.container}>
+        <View style={styles.listTab}>
+          {listTab.map((e) => {
+            return (
+              <TouchableOpacity
                 style={[
-                  styles.iconTab,
-                  status === e.status && styles.textTabActive,
+                  styles.btnTab,
+                  status === e.status && styles.btnTabActive,
                 ]}
+                onPress={() => setStatusFilter(e.status)}
               >
-                {e.icon}
-              </Text>
-              <Text style={styles.textTab}> {e.status}</Text>
-            </TouchableOpacity>
-          );
-        })}
+                <Text
+                  style={[
+                    styles.iconTab,
+                    status === e.status && styles.textTabActive,
+                  ]}
+                >
+                  {e.icon}
+                </Text>
+                <Text style={styles.textTab}> {e.status}</Text>
+              </TouchableOpacity>
+            );
+          })}
+        </View>
+        <FlatList
+          data={dataList}
+          keyExtractor={(e, i) => i.toString()}
+          renderItem={renderItem}
+        />
       </View>
 
-      <FlatList
-        data={dataList}
-        keyExtractor={(e, i) => i.toString()}
-        renderItem={renderItem}
-      />
-    </SafeAreaView>
+      <View
+        style={{
+          alignItems: "center",
+        }}
+      >
+        <TouchableOpacity
+        // onPress={() => navigation.navigate("Userprofile")}
+        // style={{
+        //   backgroundColor: "green",
+        //   padding: 10,
+        //   borderRadius: 10,
+        // }}
+        >
+          <LinearGradient
+            colors={["#16323B", "#1F4C5B", "#1E5966", "#16323B"]}
+            style={{
+              height: 49,
+              width: 200,
+              justifyContent: "center",
+              alignItems: "center",
+              // marginHorizontal: 50,
+              borderRadius: 10,
+              // opacity: mobilenumber.length > 1 && !istick ? 1 : 0.5,
+              // marginTop: 30,
+            }}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 1 }}
+            useAngle={45}
+          >
+            <Text style={{ color: "#fff", fontSize: 18, fontWeight: "600" }}>
+              Apply Filter
+            </Text>
+          </LinearGradient>
+        </TouchableOpacity>
+      </View>
+    </>
   );
 }
 const renderItem = ({ item, index }) => {
@@ -218,7 +256,6 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     paddingHorizontal: 10,
-    justifyContent: "center",
   },
   listTab: {
     borderColor: "#f5f5f5",
@@ -272,7 +309,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: "red",
     marginLeft: 30,
-    marginTop: 10,
+    // marginTop: 10,
   },
   itemName: {
     fontWeight: "bold",

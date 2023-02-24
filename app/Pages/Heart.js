@@ -26,6 +26,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import { Use } from "react-native-svg";
+import Top2 from "../components/Topcontainer2";
 
 //get a item
 
@@ -45,7 +46,7 @@ const DATA = [
 ];
 
 const Items = ({ title, sal, per, time, loc, Dis, name, short }) => (
-  <View style={{ flex: 1, marginBottom: 20 }}>
+  <View style={{ flex: 1, marginBottom: 20, marginTop: 10 }}>
     <View
       style={{
         backgroundColor: "#F2F2F2",
@@ -262,7 +263,7 @@ const Heart = ({ navigation }) => {
   async function fetchdata() {
     console.log("i am at the dataass");
     try {
-      await fetch("http://192.168.1.2:5000/api/s_l_like_job/4", {
+      await fetch("http://192.168.1.19:5000/api/s_l_like_job/4", {
         method: "GET", // *GET, POST, PUT, DELETE, etc.
         mode: "cors", // no-cors, *cors, same-origin
         cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
@@ -284,7 +285,7 @@ const Heart = ({ navigation }) => {
       console.warn(error);
     }
   }
-  if (loading) {
+  if (loading && data.length > 0) {
     return (
       <View>
         <Text>Loading..</Text>
@@ -293,13 +294,14 @@ const Heart = ({ navigation }) => {
   }
   return (
     <>
-      <Top />
+      <Top2 />
 
       <SafeAreaView style={styles.container}>
         <View>
           {refreshing ? <ActivityIndicator /> : null}
           <FlatList
             data={data}
+            decelerationRate="fast"
             renderItem={({ item }) => (
               <Items
                 title={item.job_title}

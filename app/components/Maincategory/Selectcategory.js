@@ -200,7 +200,7 @@ export default function SelectCategory({ route }) {
           </Pressable>
         </View>
       </View> */}
-      <ScrollView>
+      <ScrollView decelerationRate="fast">
         <View style={{ justifyContent: "center", alignItems: "center" }}>
           <View
             style={{
@@ -498,6 +498,11 @@ export default function SelectCategory({ route }) {
             borderRadius: 20,
           }}
         >
+          <Image
+            resizeMode="contain"
+            source={require("../../images/Ad1.png")}
+            style={{ width: "100%", height: "100%" }}
+          />
           {/* <Carousel
             data={imageData2}
             // autoPlay={true}
@@ -599,8 +604,8 @@ export default function SelectCategory({ route }) {
           >
             <Image
               resizeMode="contain"
-              source={require("../../images/government.png")}
               style={{ width: 40, height: 40 }}
+              source={require("../../images/freelance.png")}
             />
             <Text
               style={{
@@ -651,7 +656,7 @@ export default function SelectCategory({ route }) {
           >
             <Image
               resizeMode="contain"
-              source={require("../../images/freelance.png")}
+              source={require("../../images/government.png")}
               style={{ width: 40, height: 40 }}
             />
             <Text

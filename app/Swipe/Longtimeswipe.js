@@ -5,6 +5,7 @@ import {
   StyleSheet,
   Text,
   View,
+  Alert,
   SafeAreaView,
   Dimensions,
   Animated,
@@ -86,10 +87,11 @@ export default function LongtimeSwiperCard({ route }) {
   const [index, setIndex] = React.useState(0);
   const [data, setData] = useState([]);
   const [postId, setpostId] = useState({});
+  const [page, setpage] = useState(0);
+
   const [address, setaddress] = useState(null);
   const [loading, setloading] = useState(true);
   const [search, setSearch] = useState("");
-  const [page, setpage] = useState(0);
 
   //to get  or check the handlelike
   const handleLikeButtonPress = (card) => {
@@ -111,7 +113,7 @@ export default function LongtimeSwiperCard({ route }) {
     body.user_id = paras1;
     console.log(body);
     try {
-      await fetch("http://192.168.1.2:5000/api/l_like_job", {
+      await fetch("http://192.168.1.19:5000/api/l_like_job", {
         method: "post", // *GET, POST, PUT, DELETE, etc.
         mode: "cors", // no-cors, *cors, same-origin
         cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
@@ -138,7 +140,7 @@ export default function LongtimeSwiperCard({ route }) {
     body.user_id = paras1;
     console.log(body);
     try {
-      await fetch("http://192.168.1.2:5000/api/longtime_apply_job", {
+      await fetch("http://192.168.1.19:5000/api/longtime_apply_job", {
         method: "post", // *GET, POST, PUT, DELETE, etc.
         mode: "cors", // no-cors, *cors, same-origin
         cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
@@ -246,7 +248,7 @@ export default function LongtimeSwiperCard({ route }) {
     const body = {};
     body.page = 0;
     try {
-      await fetch("http://192.168.1.2:5000/api/limit/L_like_apply_check/4", {
+      await fetch("http://192.168.1.19:5000/api/limit/L_like_apply_check/4", {
         method: "POST",
         mode: "cors",
         cache: "no-cache",
@@ -300,7 +302,7 @@ export default function LongtimeSwiperCard({ route }) {
     const body = {};
     body.page = paras;
     try {
-      await fetch("http://192.168.1.2:5000/api/limit/L_like_apply_check/4", {
+      await fetch("http://192.168.1.19:5000/api/limit/L_like_apply_check/4", {
         method: "POST",
         mode: "cors",
         cache: "no-cache",
@@ -327,7 +329,36 @@ export default function LongtimeSwiperCard({ route }) {
       console.log(error);
     }
   };
+  const onSwiped = () => {
+    console.log(data);
 
+    transitionRef.current.animateNextTransition();
+    if ((index) => 0) {
+      console.log("new page dynamic");
+      console.log(page);
+      setIndex(index + 1);
+      // console.log();
+      if (index === 7 * page) {
+        getdata1(page);
+      }
+    } else {
+      Alert.alert("please start the at the oppsite direction!");
+    }
+  };
+
+  const onSwipedRight = () => {
+    // console.log(data[index]);
+    // console.log(data[index].apply);
+    // console.log(data);
+    transitionRef.current.animateNextTransition();
+    console.log("Right swipe");
+    console.log(index);
+    setIndex(index - 1);
+    // if (index === 7) {
+    //   Alert.alert("hiiiiiiii");
+    //   getdata1(page);
+    // }
+  };
   const Card = ({ card }) => {
     const { state, dispatch } = useContext(AuthContext);
 
@@ -365,10 +396,10 @@ export default function LongtimeSwiperCard({ route }) {
       <Animated.ScrollView
         vertical={true}
         horizontal={false}
-        decelerationRate={0}
+        decelerationRate="fast"
       >
         <TouchableWithoutFeedback
-          hitSlop={{ top: 20, bottom: -1100, left: -1100, right: -1000 }}
+          hitSlop={{ top: 200, bottom: -1100, left: -1100, right: -1000 }}
         >
           <View style={styles.card}>
             <View
@@ -517,8 +548,6 @@ export default function LongtimeSwiperCard({ route }) {
 
                       borderRadius: 50,
                       resizeMode: "contain",
-                      borderColor: "#6BC3FF",
-                      borderWidth: 1,
                     }}
                   />
                 ) : (
@@ -534,8 +563,6 @@ export default function LongtimeSwiperCard({ route }) {
 
                       borderRadius: 50,
                       resizeMode: "contain",
-                      borderColor: "#6BC3FF",
-                      borderWidth: 1,
                     }}
                   />
                 )}
@@ -590,8 +617,9 @@ export default function LongtimeSwiperCard({ route }) {
                 <View
                   style={{
                     flexDirection: "row",
-                    width: "57%",
-                    marginLeft: 20,
+                    justifyContent: "space-evenly",
+                    // width: "57%",
+                    // marginLeft: 20,
                   }}
                 >
                   <View
@@ -614,8 +642,8 @@ export default function LongtimeSwiperCard({ route }) {
                           justifyContent: "center",
 
                           flexDirection: "row",
-                          marginHorizontal: 10,
-
+                          marginHorizontal: 14,
+                          marginVertical: 3,
                           alignContent: "center",
                         }}
                       >
@@ -647,8 +675,8 @@ export default function LongtimeSwiperCard({ route }) {
                           justifyContent: "center",
 
                           flexDirection: "row",
-                          marginHorizontal: 10,
-
+                          marginHorizontal: 14,
+                          marginVertical: 3,
                           alignContent: "center",
                         }}
                       >
@@ -682,8 +710,8 @@ export default function LongtimeSwiperCard({ route }) {
                           justifyContent: "center",
 
                           flexDirection: "row",
-                          marginHorizontal: 10,
-
+                          marginHorizontal: 14,
+                          marginVertical: 3,
                           alignContent: "center",
                         }}
                       >
@@ -724,7 +752,8 @@ export default function LongtimeSwiperCard({ route }) {
                           flexDirection: "row",
                           // marginBottom: 10,
                           width: 150,
-                          marginHorizontal: 10,
+                          marginHorizontal: 14,
+                          marginVertical: 3,
                           alignContent: "center",
                         }}
                       >
@@ -759,7 +788,8 @@ export default function LongtimeSwiperCard({ route }) {
                           flexDirection: "row",
                           // marginBottom: 10,
                           width: 150,
-                          marginHorizontal: 10,
+                          marginHorizontal: 14,
+                          marginVertical: 3,
                           alignContent: "center",
                         }}
                       >
@@ -794,7 +824,8 @@ export default function LongtimeSwiperCard({ route }) {
                           flexDirection: "row",
                           // marginBottom: 10,
                           width: 150,
-                          marginHorizontal: 10,
+                          marginHorizontal: 14,
+                          marginVertical: 3,
                           alignContent: "center",
                         }}
                       >
@@ -820,7 +851,7 @@ export default function LongtimeSwiperCard({ route }) {
                 <View>
                   <Text
                     style={{
-                      fontSize: 16,
+                      fontSize: 18,
                       fontWeight: "700",
                       marginHorizontal: 20,
                       marginVertical: 20,
@@ -1062,37 +1093,6 @@ export default function LongtimeSwiperCard({ route }) {
     );
   };
 
-  const onSwiped = () => {
-    console.log(data);
-
-    transitionRef.current.animateNextTransition();
-    if ((index) => 0) {
-      console.log("new page dynamic");
-      console.log(page);
-      setIndex(index + 1);
-      // console.log();
-      if (index === 7 * page) {
-        getdata1(page);
-      }
-    } else {
-      Alert.alert("please start the at the oppsite direction!");
-    }
-  };
-
-  const onSwipedRight = () => {
-    // console.log(data[index]);
-    // console.log(data[index].apply);
-    // console.log(data);
-    transitionRef.current.animateNextTransition();
-    console.log("Right swipe");
-    console.log(index);
-    setIndex(index - 1);
-    // if (index === 7) {
-    //   Alert.alert("hiiiiiiii");
-    //   getdata1(page);
-    // }
-  };
-
   const [swipedAll, setSwipedAll] = useState(false);
 
   const handleOnSwipedAll = () => {
@@ -1192,17 +1192,16 @@ export default function LongtimeSwiperCard({ route }) {
           cards={data}
           cardIndex={index}
           renderCard={(card) => <Card card={card} />}
-          infinite={true}
-          backgroundColor={"transparent"}
-          cardVerticalMargin={1}
+          backgroundColor={"#fff"}
+          cardVerticalMargin={2}
           onTapCardDeadZone={5}
-          cardHorizontalMargin={3}
+          cardHorizontalMargin={4}
           useNativeDriver={true}
           stackSize={stackSize}
-          onSwiped={onSwipedRight}
-          disableLeftSwipe={index == 0 ? true : false}
-          onSwipedRight={onSwiped}
+          onSwiped={onSwiped}
+          onSwipedRight={onSwipedRight}
           onSwipedAll={handleOnSwipedAll}
+          disableRightSwipe={index == 0 ? true : false}
           swipeTop={false}
           swipeBottom={false}
           stackScale={10}
@@ -1211,14 +1210,14 @@ export default function LongtimeSwiperCard({ route }) {
           horizontalSwipe={true}
           showSecondCard={false}
           verticalSwipe={false}
-          inputOverlayLabelsOpacityRangeX={[-300, 0, 300]}
-          outputOverlayLabelsOpacityRangeX={[1, 0, 1]}
+          inputOverlayLabelsOpacityRangeX={[[-120, 0, 120]]}
+          outputOverlayLabelsOpacityRangeX={[0, 0, 1]}
           animateOverlayLabelsOpacity
           animateCardOpacity={false}
-          horizontalThreshold={75}
-          inputOverlayLabelsOpacityRangeY={[0, 0]}
-          outputOverlayLabelsOpacityRangeY={[1, 1]}
-          verticalThreshold={100}
+          horizontalThreshold={45}
+          inputOverlayLabelsOpacityRangeY={[0, 300]}
+          outputOverlayLabelsOpacityRangeY={[1, 0]}
+          // verticalThreshold={100}
           stackAnimationTension={30}
           stackAnimationFriction={7}
         />

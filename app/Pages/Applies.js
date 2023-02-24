@@ -26,8 +26,9 @@ import {
 import { AntDesign } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
+import Top2 from "../components/Topcontainer2";
 const Items = ({ title, sal, per, time, loc, Dis, name, short }) => (
-  <View style={{ flex: 1, marginBottom: 20 }}>
+  <View style={{ flex: 1, marginBottom: 20, marginTop: 10 }}>
     <View
       style={{
         backgroundColor: "#F2F2F2",
@@ -245,7 +246,7 @@ function Saved({ navigation }) {
     console.log("i am at the dataa");
     console.log(navigation);
     try {
-      await fetch("http://192.168.1.2:5000/api/s_apply_details/4", {
+      await fetch("http://192.168.1.19:5000/api/s_apply_details/4", {
         method: "GET", // *GET, POST, PUT, DELETE, etc.
         mode: "cors", // no-cors, *cors, same-origin
         cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
@@ -277,12 +278,13 @@ function Saved({ navigation }) {
   }
   return (
     <>
-      <Top />
+      <Top2 />
       <SafeAreaView style={styles.container}>
         <View>
           {refreshing ? <ActivityIndicator /> : null}
           <FlatList
             data={data}
+            decelerationRate="fast"
             renderItem={({ item }) => (
               <Items
                 title={item.job_title}

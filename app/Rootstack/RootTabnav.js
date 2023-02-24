@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Text, View } from "react-native";
+import { Text, View, StatusBar } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
 import SwiperCard from "../Pages/Post";
@@ -41,6 +41,7 @@ import LongtimeSwiperCard from "../Swipe/Longtimeswipe";
 import { BottomTabBar } from "@react-navigation/bottom-tabs";
 
 import ShorttimeSwiperCard from "../Swipe/Shorttimeswipe";
+import Top2 from "../components/Topcontainer2";
 
 const Homestack = createNativeStackNavigator();
 function SettingsScreen({ route }) {
@@ -85,6 +86,8 @@ export function ModifyHome({ route }) {
 function LikedScreen({ navigation }) {
   return (
     <View style={{ flex: 1 }}>
+      <StatusBar style="auto" />
+
       <Heart navigation={navigation} />
     </View>
   );
@@ -92,6 +95,8 @@ function LikedScreen({ navigation }) {
 function ApplieScreen({ navigation }) {
   return (
     <View style={{ flex: 1 }}>
+      <StatusBar style="auto" />
+
       <Saved navigation={navigation} />
     </View>
   );
@@ -206,7 +211,7 @@ function MealsPastScreen({ route }) {
 function MealsScreenTabs() {
   return (
     <>
-      <Top />
+      <Top2 />
       {/* <LinearGradient
       colors={["#16323B", "#1F4C5B", "#1E5966", "#16323B"]}
     style={{ flex: 1, width: "100%", justifyContent: "center" }}
@@ -216,7 +221,12 @@ function MealsScreenTabs() {
           tabBarActiveTintColor: "#fff",
           tabBarInactiveTintColor: "#333",
           tabBarPressColor: "#707070",
-          // showIcon: true,
+          tabBarLabelStyle: {
+            fontSize: 14,
+            fontWeight: "700",
+            marginTop: -5,
+            paddingTop: 0,
+          },
           // scrollEnabled: false,
           // pressColor: "#e9eef0",
           // tabStyle: {
@@ -225,26 +235,40 @@ function MealsScreenTabs() {
           //   alignContent: "center",
           //   marginVertical: -10,
           // },
+          tabBarItemStyle: {
+            alignContent: "center",
+            alignItems: "center",
+            justifyContent: "center",
+            marginBottom: 20,
+          },
           tabBarIndicatorStyle: {
             backgroundColor: "#1F4C5B",
-            height: "100%",
-            borderRadius: 10,
-            // marginBottom: 8,
+            height: 40,
+            borderRadius: 20,
+            alignItems: "center",
             width: "50%",
           },
           tabBarStyle: {
-            justifyContent: "center",
-            marginVertical: 10,
             backgroundColor: "#FFF",
-            marginHorizontal: 60,
-
-            borderRadius: 10,
+            borderRadius: 20,
             height: 40,
             width: 280,
+            marginVertical: 20,
+            // marginHorizontal: 90,
+            marginHorizontal: "15%",
           },
-          // labelStyle: { fontSize: 14 },
+          // tabBarContentContainerStyle: {
+          //   backgroundColor: "red",
+          //   justifyContent: "center",
+          //   alignItems: "center",
+          //   alignContent: "center",
+          // },
         }}
-        style={{ flex: 1, width: "100%", justifyContent: "center" }}
+        style={{
+          flex: 1,
+          width: "100%",
+          justifyContent: "center",
+        }}
       >
         <MealsTabs.Screen name="Messages" component={MealsUpcomingScreen} />
         <MealsTabs.Screen name="Notifications" component={MealsPastScreen} />
@@ -285,7 +309,7 @@ function SwipeMealsPastScreen({ route }) {
 function SwipeMealsScreenTabs() {
   return (
     <>
-      <Top />
+      <Top2 />
       {/* <LinearGradient
       colors={["#16323B", "#1F4C5B", "#1E5966", "#16323B"]}
     style={{ flex: 1, width: "100%", justifyContent: "center" }}
@@ -295,6 +319,12 @@ function SwipeMealsScreenTabs() {
           tabBarActiveTintColor: "#fff",
           tabBarInactiveTintColor: "#333",
           tabBarPressColor: "#707070",
+          tabBarLabelStyle: {
+            fontSize: 14,
+            fontWeight: "700",
+            marginTop: -5,
+            paddingTop: 0,
+          },
           // showIcon: true,
           // pressColor: "#e9eef0",
           // tabStyle: {
@@ -306,20 +336,19 @@ function SwipeMealsScreenTabs() {
           tabBarIndicatorStyle: {
             backgroundColor: "#1F4C5B",
             height: "100%",
-            borderRadius: 10,
+            borderRadius: 20,
             // marginBottom: 8,
             width: "50%",
           },
           swipeEnabled: false,
           tabBarStyle: {
-            justifyContent: "center",
             marginVertical: 10,
             backgroundColor: "#FFF",
-            marginHorizontal: 60,
-
-            borderRadius: 10,
+            alignContent: "center",
+            margin: 35,
+            borderRadius: 20,
             height: 40,
-            width: 280,
+            width: 320,
           },
           // labelStyle: { fontSize: 14 },
         }}
@@ -375,37 +404,51 @@ function JobMealsScreenTabs() {
     style={{ flex: 1, width: "100%", justifyContent: "center" }}
     > */}
       <MealsTabs.Navigator
-        tabBarOptions={{
-          activeTintColor: "#ffffff",
-          inactiveTintColor: "#333",
-          showIcon: true,
-          pressColor: "#e9eef0",
-          scrollEnabled: false,
-          tabStyle: {
-            borderRadius: 10,
-            justifyContent: "center",
-            alignContent: "center",
-            marginVertical: -10,
+        screenOptions={{
+          tabBarActiveTintColor: "#fff",
+          tabBarInactiveTintColor: "#333",
+          tabBarPressColor: "#707070",
+          tabBarLabelStyle: {
+            fontSize: 14,
+            fontWeight: "700",
+            marginTop: -5,
+            paddingTop: 0,
           },
-          indicatorStyle: {
+          // scrollEnabled: false,
+          // pressColor: "#e9eef0",
+          // tabStyle: {
+          //   borderRadius: 10,
+          //   justifyContent: "center",
+          //   alignContent: "center",
+          //   marginVertical: -10,
+          // },
+          tabBarItemStyle: {
+            alignContent: "center",
+            alignItems: "center",
+            justifyContent: "center",
+            marginBottom: 20,
+          },
+          tabBarIndicatorStyle: {
             backgroundColor: "#1F4C5B",
-            height: "100%",
-            borderRadius: 10,
-            // marginBottom: 8,
+            height: 40,
+            borderRadius: 20,
+            alignItems: "center",
             width: "50%",
           },
-          style: {
-            justifyContent: "center",
-            backgroundColor: "#fff",
-            paddingTop: -10,
-            marginHorizontal: 60,
-            borderRadius: 10,
+          tabBarStyle: {
+            marginVertical: 10,
+            backgroundColor: "#FFF",
+            margin: 60,
+            borderRadius: 20,
             height: 40,
             width: 280,
           },
-          labelStyle: { fontSize: 14 },
         }}
-        style={{ flex: 1, width: "100%", justifyContent: "center" }}
+        style={{
+          flex: 1,
+          width: "100%",
+          justifyContent: "center",
+        }}
       >
         <MealsTabs.Screen
           name="Messages"
@@ -457,37 +500,51 @@ function RentalseekerMealsScreenTabs() {
     style={{ flex: 1, width: "100%", justifyContent: "center" }}
     > */}
       <MealsTabs.Navigator
-        tabBarOptions={{
-          activeTintColor: "#ffffff",
-          inactiveTintColor: "#333",
-          showIcon: true,
-          pressColor: "#e9eef0",
-          scrollEnabled: false,
-          tabStyle: {
-            borderRadius: 10,
-            justifyContent: "center",
-            alignContent: "center",
-            marginVertical: -10,
+        screenOptions={{
+          tabBarActiveTintColor: "#fff",
+          tabBarInactiveTintColor: "#333",
+          tabBarPressColor: "#707070",
+          tabBarLabelStyle: {
+            fontSize: 14,
+            fontWeight: "700",
+            marginTop: -5,
+            paddingTop: 0,
           },
-          indicatorStyle: {
+          // scrollEnabled: false,
+          // pressColor: "#e9eef0",
+          // tabStyle: {
+          //   borderRadius: 10,
+          //   justifyContent: "center",
+          //   alignContent: "center",
+          //   marginVertical: -10,
+          // },
+          tabBarItemStyle: {
+            alignContent: "center",
+            alignItems: "center",
+            justifyContent: "center",
+            marginBottom: 20,
+          },
+          tabBarIndicatorStyle: {
             backgroundColor: "#1F4C5B",
-            height: "100%",
-            borderRadius: 10,
-            // marginBottom: 8,
+            height: 40,
+            borderRadius: 20,
+            alignItems: "center",
             width: "50%",
           },
-          style: {
-            justifyContent: "center",
-            backgroundColor: "#fff",
-            paddingTop: -10,
-            marginHorizontal: 60,
-            borderRadius: 10,
+          tabBarStyle: {
+            marginVertical: 10,
+            backgroundColor: "#FFF",
+            margin: 60,
+            borderRadius: 20,
             height: 40,
             width: 280,
           },
-          labelStyle: { fontSize: 14 },
         }}
-        style={{ flex: 1, width: "100%", justifyContent: "center" }}
+        style={{
+          flex: 1,
+          width: "100%",
+          justifyContent: "center",
+        }}
       >
         <MealsTabs.Screen
           name="Messages"
@@ -538,37 +595,51 @@ function RentalposterMealsScreenTabs() {
     style={{ flex: 1, width: "100%", justifyContent: "center" }}
     > */}
       <MealsTabs.Navigator
-        tabBarOptions={{
-          activeTintColor: "#ffffff",
-          inactiveTintColor: "#333",
-          showIcon: true,
-          pressColor: "#e9eef0",
-          scrollEnabled: false,
-          tabStyle: {
-            borderRadius: 10,
-            justifyContent: "center",
-            alignContent: "center",
-            marginVertical: -10,
+        screenOptions={{
+          tabBarActiveTintColor: "#fff",
+          tabBarInactiveTintColor: "#333",
+          tabBarPressColor: "#707070",
+          tabBarLabelStyle: {
+            fontSize: 14,
+            fontWeight: "700",
+            marginTop: -5,
+            paddingTop: 0,
           },
-          indicatorStyle: {
+          // scrollEnabled: false,
+          // pressColor: "#e9eef0",
+          // tabStyle: {
+          //   borderRadius: 10,
+          //   justifyContent: "center",
+          //   alignContent: "center",
+          //   marginVertical: -10,
+          // },
+          tabBarItemStyle: {
+            alignContent: "center",
+            alignItems: "center",
+            justifyContent: "center",
+            marginBottom: 20,
+          },
+          tabBarIndicatorStyle: {
             backgroundColor: "#1F4C5B",
-            height: "100%",
-            borderRadius: 10,
-            // marginBottom: 8,
+            height: 40,
+            borderRadius: 20,
+            alignItems: "center",
             width: "50%",
           },
-          style: {
-            justifyContent: "center",
-            backgroundColor: "#fff",
-            paddingTop: -10,
-            marginHorizontal: 60,
-            borderRadius: 10,
+          tabBarStyle: {
+            marginVertical: 10,
+            backgroundColor: "#FFF",
+            margin: 60,
+            borderRadius: 20,
             height: 40,
             width: 280,
           },
-          labelStyle: { fontSize: 14 },
         }}
-        style={{ flex: 1, width: "100%", justifyContent: "center" }}
+        style={{
+          flex: 1,
+          width: "100%",
+          justifyContent: "center",
+        }}
       >
         <MealsTabs.Screen
           name="Messages"
@@ -596,89 +667,92 @@ export default function BottomTAb({ route }) {
   // console.log("im at bot nav");
   // console.log(route.params.Details);
   return (
-    <Tab.Navigator
-      screenOptions={({ route }) => ({
-        tabBarIcon: ({ focused, color, size }) => {
-          let iconName;
-          if (route.name === "Homes") {
-            iconName = focused ? "home-sharp" : "ios-home-outline";
-          } else if (route.name == "liked") {
-            iconName = focused ? "heart" : "ios-heart-outline";
-          } else if (route.name == "applied") {
-            iconName = focused
-              ? "checkmark-circle"
-              : "checkmark-circle-outline";
-          } else if (route.name == "messagefake") {
-            iconName = focused
-              ? "chatbubble-ellipses"
-              : "chatbubble-ellipses-outline";
-          }
-          return (
-            <Ionicons name={iconName} size={28} color={color} fill={"red"} />
-          );
-        },
-        tabBarActiveTintColor: "#1E5966",
-        tabBarInactiveTintColor: "#333",
-        headerShown: false,
-        tabBarPosition: "bottom",
-        tabBarStyle: {
-          backgroundColor: "#fff",
-          borderTopLeftRadius: 25,
-          borderTopRightRadius: 25,
-          shadowColor: "#333",
-          shadowOffset: {
-            width: 3,
-            height: 6,
+    <>
+      <StatusBar style="auto" />
+      <Tab.Navigator
+        screenOptions={({ route }) => ({
+          tabBarIcon: ({ focused, color, size }) => {
+            let iconName;
+            if (route.name === "Homes") {
+              iconName = focused ? "home-sharp" : "ios-home-outline";
+            } else if (route.name == "liked") {
+              iconName = focused ? "heart" : "ios-heart-outline";
+            } else if (route.name == "applied") {
+              iconName = focused
+                ? "checkmark-circle"
+                : "checkmark-circle-outline";
+            } else if (route.name == "messagefake") {
+              iconName = focused
+                ? "chatbubble-ellipses"
+                : "chatbubble-ellipses-outline";
+            }
+            return (
+              <Ionicons name={iconName} size={28} color={color} fill={"red"} />
+            );
           },
-          shadowOpacity: 0.2,
-          shadowRadius: 10,
-          elevation: 8,
-          height: "7%",
-        },
-      })}
-    >
-      <Tab.Screen
-        name="Homes"
-        component={ModifyHome}
-        options={{ title: "Home" }}
-        // initialParams={{ userID: route.params.userId }}
-      />
-      {/* <Tab.Screen
+          tabBarActiveTintColor: "#1E5966",
+          tabBarInactiveTintColor: "#333",
+          headerShown: false,
+          tabBarPosition: "bottom",
+          tabBarStyle: {
+            backgroundColor: "#fff",
+            borderTopLeftRadius: 25,
+            borderTopRightRadius: 25,
+            shadowColor: "#333",
+            shadowOffset: {
+              width: 3,
+              height: 6,
+            },
+            shadowOpacity: 0.2,
+            shadowRadius: 10,
+            elevation: 8,
+            height: "7%",
+          },
+        })}
+      >
+        <Tab.Screen
+          name="Homes"
+          component={ModifyHome}
+          options={{ title: "Home" }}
+          // initialParams={{ userID: route.params.userId }}
+        />
+        {/* <Tab.Screen
         name="settings"
         component={SettingsScreen}
         options={{ title: "" }} */}
-      {/* initialParams={{ Details: route.params.Details }} */}
-      {/* /> */}
-      {/* <Tab.Screen
+        {/* initialParams={{ Details: route.params.Details }} */}
+        {/* /> */}
+        {/* <Tab.Screen
         name="Select"
         component={SwiperCard}
         options={{ title: "" }}
         // initialParams={{ Details: route.params.Details }}
       /> */}
 
-      <Tab.Screen
-        name="liked"
-        component={LikedScreen}
-        options={{ title: "Saved" }}
-      />
-      <Tab.Screen
-        name="applied"
-        component={ApplieScreen}
-        options={{ title: "Applied" }}
-      />
+        <Tab.Screen
+          name="liked"
+          component={LikedScreen}
+          options={{ title: "Saved" }}
+        />
+        <Tab.Screen
+          name="applied"
+          component={ApplieScreen}
+          options={{ title: "Applied" }}
+        />
 
-      {/* <Tab.Screen name="chat" component={ChatScreen} options={{ title: "" }} /> */}
-      <Tab.Screen
-        name="messagefake"
-        component={ChatmainScreen}
-        options={{ title: "message" }}
-      />
-      {/* <Tab.Screen
+        {/* <Tab.Screen name="chat" component={ChatScreen} options={{ title: "" }} /> */}
+        <Tab.Screen
+          name="messagefake"
+          component={ChatmainScreen}
+          options={{ title: "message" }}
+        />
+        {/* <Tab.Screen
         name="filter"
         component={filterscreenmain}
         options={{ title: "message" }}
       /> */}
-    </Tab.Navigator>
+      </Tab.Navigator>
+    </>
   );
 }
 
