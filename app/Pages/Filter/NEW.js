@@ -38,7 +38,7 @@ const listTab = [
       <Image
         resizeMode="contain"
         style={{ height: 30, width: 30 }}
-        source={require("../../images/pin.png")}
+        source={require("../../images/Imagefilter/locationpin.png")}
       />
     ),
   },
@@ -49,7 +49,7 @@ const listTab = [
       <Image
         resizeMode="contain"
         style={{ height: 30, width: 30 }}
-        source={require("../../images/categories.png")}
+        source={require("../../images/Imagefilter/categories.png")}
       />
     ),
   },
@@ -59,7 +59,7 @@ const listTab = [
       <Image
         resizeMode="contain"
         style={{ height: 30, width: 30 }}
-        source={require("../../images/hourglass.png")}
+        source={require("../../images/Imagefilter/hourglass.png")}
       />
     ),
   },
@@ -69,7 +69,7 @@ const listTab = [
       <Image
         resizeMode="contain"
         style={{ height: 30, width: 30 }}
-        source={require("../../images/online-work.png")}
+        source={require("../../images/Imagefilter/workspace.png")}
       />
     ),
   },
@@ -79,7 +79,7 @@ const listTab = [
       <Image
         resizeMode="contain"
         style={{ height: 30, width: 30 }}
-        source={require("../../images/earning.png")}
+        source={require("../../images/Imagefilter/payment.png")}
       />
     ),
   },
@@ -89,7 +89,7 @@ const listTab = [
       <Image
         resizeMode="contain"
         style={{ height: 30, width: 30 }}
-        source={require("../../images/graduation-cap.png")}
+        source={require("../../images/Imagefilter/college.png")}
       />
     ),
   },
@@ -99,7 +99,7 @@ const listTab = [
       <Image
         resizeMode="contain"
         style={{ height: 30, width: 30 }}
-        source={require("../../images/online-work.png")}
+        source={require("../../images/Imagefilter/portfolio.png")}
       />
     ),
   },
@@ -110,7 +110,7 @@ const listTab = [
       <Image
         resizeMode="contain"
         style={{ height: 30, width: 30 }}
-        source={require("../../images/office-building.png")}
+        source={require("../../images/Imagefilter/company.png")}
       />
     ),
   },
@@ -120,7 +120,7 @@ const listTab = [
       <Image
         resizeMode="contain"
         style={{ height: 30, width: 30 }}
-        source={require("../../images/post.png")}
+        source={require("../../images/Imagefilter/postnote.png")}
       />
     ),
   },
@@ -347,25 +347,26 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: "row",
-    paddingHorizontal: 10,
+    // paddingHorizontal: 1,
+
+    justifyContent: "center",
   },
   listTab: {
     borderColor: "#f5f5f5",
     borderWidth: 2,
-    backgroundColor: "#fff",
+    backgroundColor: "#1E5966",
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
     marginTop: 20,
     marginLeft: 5,
     borderRadius: 20,
-    // height: "60%",
-    // width: "30%",
+    // backgroundColor: "red",
   },
   btnTab: {
     // width: 0,
     // flexDirection: "column",
-    marginBottom: 10,
+    marginBottom: 5,
     paddingHorizontal: 5,
     paddingVertical: 3,
     alignContent: "center",
@@ -374,6 +375,7 @@ const styles = StyleSheet.create({
   },
   textTab: {
     fontSize: 12,
+    color: "#fff",
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
@@ -387,8 +389,9 @@ const styles = StyleSheet.create({
     alignContent: "center",
   },
   btnTabActive: {
-    backgroundColor: "#1E5966",
-    borderRadius: 5,
+    backgroundColor: "#333",
+    height: "10%",
+    borderRadius: 20,
   },
   textTabActive: {
     color: "#333",
@@ -400,7 +403,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     marginLeft: 30,
-    // marginTop: 10,
+    marginTop: 10,
   },
   itemName: {
     fontWeight: "bold",

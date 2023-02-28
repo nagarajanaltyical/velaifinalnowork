@@ -1211,7 +1211,7 @@ export default function ShorttimeSwiperCard({ route }) {
           renderCard={(card) => <Card card={card} />}
           backgroundColor={"transparent"}
           cardVerticalMargin={1}
-          onTapCardDeadZone={5}
+          // onTapCardDeadZone={5}
           cardHorizontalMargin={4}
           onSwiped={onSwiped}
           disableRightSwipe={index == 0 ? true : false}
@@ -1227,16 +1227,16 @@ export default function ShorttimeSwiperCard({ route }) {
           horizontalSwipe={true}
           showSecondCard={false}
           verticalSwipe={false}
-          inputOverlayLabelsOpacityRangeX={[[-120, 0, 120]]}
-          outputOverlayLabelsOpacityRangeX={[1, 0, 1]}
+          inputOverlayLabelsOpacityRangeX={[0, 120]}
+          outputOverlayLabelsOpacityRangeX={[0, 1]}
           animateOverlayLabelsOpacity
           animateCardOpacity={false}
-          horizontalThreshold={45}
+          horizontalThreshold={15}
           inputOverlayLabelsOpacityRangeY={[0, 300]}
           outputOverlayLabelsOpacityRangeY={[1, 0]}
           // verticalThreshold={100}
-          stackAnimationTension={30}
-          stackAnimationFriction={7}
+          stackAnimationTension={8}
+          stackAnimationFriction={50}
         />
 
         <View>

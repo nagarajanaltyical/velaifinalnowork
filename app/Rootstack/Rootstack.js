@@ -51,6 +51,8 @@ import New from "../Pages/Filter/NEW";
 import Shorttimefilter from "../Pages/Filter/ShortTimefilter/Shorttimefilter";
 
 import Topforjobprovider from "../components/Top/Topforjobprovider";
+import CompanyJobProvider from "../Pages/companyjobprovider";
+import PersonalJobProvider from "../Pages/personalJobProvider";
 const Stack = createStackNavigator();
 
 function CustomHeaderBackImage({ navigation }) {
@@ -140,6 +142,16 @@ function Root({ navigation }) {
               backgroundColor: "#fff",
             },
           }}
+        />
+        <Stack.Screen
+          name="p_job_provider"
+          component={PersonalJobProvider}
+          options={{ headerShown: true }}
+        ></Stack.Screen>
+        <Stack.Screen
+          name="c_job_provider"
+          component={CompanyJobProvider}
+          options={{ headerShown: true }}
         />
         <Stack.Screen
           name="Long"

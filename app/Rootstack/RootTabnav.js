@@ -316,6 +316,8 @@ function SwipeMealsScreenTabs() {
     > */}
       <MealsTabs.Navigator
         screenOptions={{
+          tabBarGap: 5,
+
           tabBarActiveTintColor: "#fff",
           tabBarInactiveTintColor: "#333",
           tabBarPressColor: "#707070",
@@ -325,6 +327,7 @@ function SwipeMealsScreenTabs() {
             marginTop: -5,
             paddingTop: 0,
           },
+
           // showIcon: true,
           // pressColor: "#e9eef0",
           // tabStyle: {
@@ -340,6 +343,7 @@ function SwipeMealsScreenTabs() {
             // marginBottom: 8,
             width: "50%",
           },
+          tabBarBounces: true,
           swipeEnabled: false,
           tabBarStyle: {
             marginVertical: 10,

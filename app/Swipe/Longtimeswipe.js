@@ -814,7 +814,7 @@ export default function LongtimeSwiperCard({ route }) {
                         borderColor: "#707070",
                         borderWidth: 1,
                         marginBottom: 10,
-
+                        // backgroundColor: "#fff",
                         borderRadius: 20,
                       }}
                     >
@@ -1210,16 +1210,16 @@ export default function LongtimeSwiperCard({ route }) {
           horizontalSwipe={true}
           showSecondCard={false}
           verticalSwipe={false}
-          inputOverlayLabelsOpacityRangeX={[[-120, 0, 120]]}
-          outputOverlayLabelsOpacityRangeX={[0, 0, 1]}
+          inputOverlayLabelsOpacityRangeX={[0, 120]}
+          outputOverlayLabelsOpacityRangeX={[0, 1]}
           animateOverlayLabelsOpacity
           animateCardOpacity={false}
-          horizontalThreshold={45}
+          horizontalThreshold={15}
           inputOverlayLabelsOpacityRangeY={[0, 300]}
           outputOverlayLabelsOpacityRangeY={[1, 0]}
           // verticalThreshold={100}
-          stackAnimationTension={30}
-          stackAnimationFriction={7}
+          stackAnimationTension={8}
+          stackAnimationFriction={50}
         />
 
         <View>

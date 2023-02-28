@@ -125,7 +125,7 @@ export default function Location(props) {
           setValue={setValue1}
           setItems={setItems1}
           style={styles.drope}
-          showArrowIcon={false}
+          showArrowIcon={true}
           customItemLabelStyle={{
             fontStyle: "italic",
           }}
@@ -159,7 +159,7 @@ export default function Location(props) {
           setValue={setValue2}
           setItems={setItems2}
           style={styles.drope}
-          showArrowIcon={false}
+          showArrowIcon={true}
           customItemLabelStyle={{
             fontStyle: "italic",
           }}
@@ -193,7 +193,7 @@ export default function Location(props) {
           setValue={setValue3}
           setItems={setItems3}
           style={styles.drope}
-          showArrowIcon={false}
+          showArrowIcon={true}
           customItemLabelStyle={{
             fontStyle: "italic",
           }}
